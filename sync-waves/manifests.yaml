@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: main
-          image: nginx:1.19
+          image: nginx:latest
 ---
 apiVersion: v1
 kind: Service
