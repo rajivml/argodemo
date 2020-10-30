@@ -14,7 +14,7 @@ spec:
       - name: kotsadm-replicated-registry
       containers:
       - name: preflights-aif
-        image: aifabriconprem.azurecr.io/on-prem/preflight-checks:v20.10.1
+        image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
         imagePullPolicy: Always
         command: ["bash", "run-checks.sh"]
         args: ["-s", "{{ .Values.sql.host }}",
