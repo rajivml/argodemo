@@ -5,7 +5,7 @@ orchestrator:
 identityserver:
   endpoint: localhost
 identity:
-  accessToken: Base64Token
+  accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjUzRjE2Q0UyQjg3RTQ1RUU1RDgwOTRERjc5NjJEN0MzOTYxNjcyN0UiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJVX0ZzNHJoLVJlNWRnSlRmZVdMWHc1WVdjbjQifQ
 sql:
   host: localhost
   username: admin
@@ -17,10 +17,10 @@ dbname:
   aiTrainer: ai_trainer
   aiAppManager: ai_appmanager
 registry:
-  servicesRegistry:
-  servicesProject:
-  replicatedRegistry:
-  replicatedProject:
+  servicesRegistry: aifabriconprem.azurecr.io/on-prem
+  servicesProject: on-prem
+  replicatedRegistry: aifabriconprem.azurecr.io
+  replicatedProject: on-prem
   Namespace: default
   isAirgap: false
   metadataBranch: master
