@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Job
+metadata:
+  generateName: preflight-checks
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-weight: "-1"
+spec:
+  template:
+    spec:
+    containers:
+	- name: preflights-aif
+	  image: 'aifabriconprem.azurecr.io/on-prem/preflight-checks:v20.10.1'
+	  namespace: 'default'
+      imagePullSecrets:
+      - name: kotsadm-replicated-registry
+	  imagePullPolicy: Always
+	  command: ["bash", "run-checks.sh"]
+	  args: ["-s", "{{ .Values.sql.host }}",
+	  "-u", "{{ .Values.sql.username }}", 
+	  "-p", "{{ .Values.sql.password }}",
+	  "-o", "{{ .Values.orchestrator.endpoint }}",
+	  "-v", "{{ .Values.identityserver.endpoint }}", 
+	  "-h", "{{ .Values.ingress.host }}", 
+      "-i", "{{ .Values.identity.accessToken }}",
+	  "-e", 'onebox',
+	  "--helper-db", "{{ .Values.dbname.aiHelper }}",
+	  "--deployer-db", "{{ .Values.dbname.aiDeployer }}",
+	  "--pkgmanager-db", "{{ .Values.dbname.aiPkgManager }}",
+	  "--trainer-db", "{{ .Values.dbname.aiTrainer }}",
+	  "--appmanager-db", "{{ .Values.dbname.aiAppManager }}"]
+
+
+
+
+
+

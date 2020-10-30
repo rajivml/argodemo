@@ -1,0 +1,26 @@
+ingress:
+  host: localhost
+orchestrator:
+  endpoint: localhost
+identityserver:
+  endpoint: localhost
+identity:
+  accessToken: Base64Token
+sql:
+  host: localhost
+  username: admin
+  password: password
+dbname:
+  aiHelper: ai_helper
+  aiDeployer: ai_deployer
+  aiPkgManager: ai_pkgmanager
+  aiTrainer: ai_trainer
+  aiAppManager: ai_appmanager
+registry:
+  servicesRegistry:
+  servicesProject:
+  replicatedRegistry:
+  replicatedProject:
+  Namespace: default
+  isAirgap: false
+  metadataBranch: master
