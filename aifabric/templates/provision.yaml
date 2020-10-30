@@ -72,7 +72,7 @@ spec:
         - name: DATAMANAGER_RELEASE
           value: '20.9.1-prod'
         - name: IS_AIRGAP
-          value: false
+          value: "false"
         - name: METADATA_BRANCH
           value: master
       restartPolicy: Never
