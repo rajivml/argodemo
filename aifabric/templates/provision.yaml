@@ -3,7 +3,7 @@ kind: Job
 metadata:
   labels:
     app: provision
-  name: "provision-{{ randAlphaNum 20 | nospace | lower }}"
+  name: aifabricdeployment
   namespace: default
   annotations:
     helm.sh/hook: pre-install
