@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: preflight-checks
+  name: "preflight-checks-{{ randAlphaNum 20 | nospace | lower }}""
   namespace: default
   generateName: preflight-checks
   annotations:
