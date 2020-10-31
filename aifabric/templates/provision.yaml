@@ -3,7 +3,7 @@ kind: Job
 metadata:
   labels:
     app: provision
-  name: provision-{{ randAlphaNum 10 | b64enc | quote }}
+  name: "provision-{{ randAlphaNum 20 | nospace | lower }}"
   namespace: default
 spec:
   backoffLimit: 0
