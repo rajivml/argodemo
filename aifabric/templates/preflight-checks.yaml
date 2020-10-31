@@ -1,12 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: "preflight-checks"
+  name: preflight-checks
   namespace: default
   generateName: preflight-checks
   annotations:
     helm.sh/hook: pre-install
-    helm.sh/hook-weight: "-1"
+    helm.sh/hook-weight: "-2"
     helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
 spec:
   backoffLimit: 0

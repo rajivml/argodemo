@@ -3,7 +3,7 @@ kind: Job
 metadata:
   labels:
     app: provision
-  name: "aifabricdeployment"
+  name: aifabricdeployment
   namespace: default
   annotations:
     helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
