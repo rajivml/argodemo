@@ -7,7 +7,7 @@ metadata:
   annotations:
     helm.sh/hook: pre-install
     helm.sh/hook-weight: "-1"
-    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation,hook-failed
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
 spec:
   backoffLimit: 0
   template:
@@ -19,5 +19,5 @@ spec:
       - name: preflights-aif
         image: aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1
         imagePullPolicy: IfNotPresent
-        command: ["/usr/bin/kubectl delete job aifabricdeployment"]
+        command: ["kubectl delete job aifabricdeployment"]
       restartPolicy: Never
