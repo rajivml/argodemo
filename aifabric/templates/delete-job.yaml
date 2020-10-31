@@ -19,5 +19,6 @@ spec:
       - name: preflights-aif
         image: aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1
         imagePullPolicy: IfNotPresent
-        command: ["kubectl delete job aifabricdeployment"]
+        command: ["/bin/sh","-c"]
+        args: ["kubectl delete job aifabricdeployment"]
       restartPolicy: Never
