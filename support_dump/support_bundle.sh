@@ -53,8 +53,12 @@ get_url_signed=`echo $get_response | jq -r '.data.url'`
 
 echo "########################################## Support Dump ######################################"
 echo -e "\e[31m  Please click on this link to download support dump: \e[0m"
-echo $get_url_signed
+echo "$get_url_signed"
 
+url=$(tr -d ' ' <<< "$get_url_signed")
+echo $url
+
+echo -ne $get_url_signed 
 
 	
 	
