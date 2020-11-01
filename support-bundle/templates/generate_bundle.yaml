@@ -13,7 +13,7 @@ spec:
       imagePullSecrets:
       - name: kotsadm-replicated-registry
       containers:
-      - image: 'aifabriconprem.azurecr.io/on-prem/support-dump:argocd'
+      - image: 'aifabriconprem.azurecr.io/on-prem/support-dump:argocd1'
         name: support-dump
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
       restartPolicy: Never
