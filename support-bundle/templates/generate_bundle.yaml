@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: support-dump
+  name: support-dump
+  namespace: default
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      serviceAccountName: provision
+      imagePullSecrets:
+      - name: kotsadm-replicated-registry
+      containers:
+      - image: 'aifabriconprem.azurecr.io/on-prem/support-dump:argocd'
+        name: support-dump
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Never
