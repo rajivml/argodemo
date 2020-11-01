@@ -52,13 +52,7 @@ get_url_signed=`echo $get_response | jq -r '.data.url'`
 
 
 echo "########################################## Support Dump ######################################"
-echo -e "\e[31m  Please click on this link to download support dump: \e[0m"
-echo "$get_url_signed"
+echo -e "\e[31m Please click on this link to download support dump: \e[0m"
 
-url=$(tr -d ' ' <<< "$get_url_signed")
-echo $url
-
-echo -ne $get_url_signed 
-
-	
-	
+short_url=$(curl -s http://tinyurl.com/api-create.php?url=${get_url_signed})
+echo "Please Click here to download the support dump : ${short_url}"
