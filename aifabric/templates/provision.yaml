@@ -34,13 +34,13 @@ spec:
         - name: SQL_PASSWORD
           value: "{{ .Values.sql.password }}"
         - name: SERVICES_REGISTRY
-          value: "{{ .Values.registry.servicesRegistry }}"
+          value: aifabriconprem.azurecr.io
         - name: SERVICES_PROJECT
-          value: "{{ .Values.registry.servicesProject }}"
+          value: on-prem
         - name: REPLICATED_REGISTRY
-          value: "{{ .Values.registry.replicatedRegistry }}"
+          value: aifabriconprem.azurecr.io
         - name: REPLICATED_PROJECT
-          value: "{{ .Values.registry.replicatedProject }}"
+          value: on-prem
         - name: REPLICATED_NAMESPACE
           value: default
         - name: HELPER_DBNAME
