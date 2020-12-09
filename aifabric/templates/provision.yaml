@@ -11,7 +11,7 @@ spec:
     spec:
       serviceAccountName: provision
       imagePullSecrets:
-      - name: kotsadm-replicated-registry
+      - name: azure-container-registry
       containers:
       - image: 'aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1'
         name: daemon-script
