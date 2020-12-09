@@ -13,7 +13,7 @@ spec:
   template:
     spec:
       imagePullSecrets:
-      - name: azure-container-registry
+      - name: kotsadm-replicated-registry
       containers:
       - name: preflights-aif
         image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
