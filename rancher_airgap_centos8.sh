@@ -61,7 +61,7 @@ EOF
 # download all rpms and their dependencies
 mkdir rke_rpm_deps;
 cd rke_rpm_deps;
-yum update -y --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="rancher-rke2-latest" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
+echo "y" | yum install --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="rancher-rke2-latest" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
 createrepo -v .;
 cd ..;
 tar -zcvf rke_rpm_deps.tar.gz rke_rpm_deps;
