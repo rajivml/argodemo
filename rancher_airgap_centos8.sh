@@ -35,6 +35,7 @@ dnf -y install pkg-config
 
 #for moduletools gi library
 wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python36-gobject-base-3.22.0-6.el7.x86_64.rpm
+ls python36*.rpm
 dnf -y install python36-gobject-base-3.22.0-6.el7.x86_64.rpm
 
 # grab and verify rke images
