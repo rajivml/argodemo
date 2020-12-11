@@ -5,8 +5,8 @@ set -e
 localectl set-locale LANG=en_US.UTF-8
 # set variables
 YUM_PACKAGES="unzip container-selinux rke2-server rke2-agent"
-RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/latest/download/rke2-images.linux-amd64.tar.gz"
-RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/latest/download/sha256sum-amd64.txt"
+RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/rke2-images.linux-amd64.tar.gz"
+RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/sha256sum-amd64.txt"
 RKE2_VERSION="1.18"
 
 # preflight - check for centos-8 and root user
