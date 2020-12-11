@@ -73,10 +73,21 @@ gpgcheck=1
 gpgkey=https://rpm.releases.hashicorp.com/gpg
 EOF
 
+#Install kubectl
+cat <<-EOF >"/etc/yum.repos.d/kubernetes.repo"
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=0
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
 # download all rpms and their dependencies
 mkdir rke_rpm_deps;
 cd rke_rpm_deps;
-echo "y" | yum -y install --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="rancher-rke2-latest" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
+echo "y" | yum -y install --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="rancher-rke2-latest" --enablerepo="kubernetes" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
 createrepo -v .;
 # create traditional rpm repo
 createrepo_c .
