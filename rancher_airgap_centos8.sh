@@ -22,6 +22,7 @@ fi
 export workdir=rke-government-deps-$(date +"%y-%m-%d-%H-%M-%S");
 mkdir $workdir;
 cd $workdir;
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 yum install -y yum-utils createrepo unzip;
 
 # grab and verify rke images
