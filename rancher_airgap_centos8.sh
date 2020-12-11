@@ -23,7 +23,19 @@ export workdir=rke-government-deps-$(date +"%y-%m-%d-%H-%M-%S");
 mkdir $workdir;
 cd $workdir;
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
-yum install -y yum-utils createrepo unzip;
+yum install -y yum-utils createrepo unzip wget;
+
+#Install moduletools https://unix.stackexchange.com/questions/567057/download-rpm-and-all-dependencies-on-rhel-centos-8
+wget -O modulemd-tools.rpm http://ftp.riken.jp/Linux/fedora/epel/8/Everything/x86_64/Packages/m/modulemd-tools-0.6-1.el8.noarch.rpm
+dnf -y install modulemd-tools.rpm
+
+#Install python3 for module-tools
+dnf -y install python3
+dnf -y install pkg-config
+
+#for moduletools gi library
+wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python36-gobject-base-3.22.0-6.el7.x86_64.rpm
+dnf -y python36-gobject-base-3.22.0-6.el7.x86_64.rpm
 
 # grab and verify rke images
 curl -LO ${RKE_IMAGES_DL_URL};
@@ -64,6 +76,12 @@ mkdir rke_rpm_deps;
 cd rke_rpm_deps;
 echo "y" | yum -y install --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="rancher-rke2-latest" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
 createrepo -v .;
+# create traditional rpm repo
+createrepo_c .
+# generate modules meta info
+repo2module  -s stable -d . modules.yaml
+# adjust modules meta info to traditional rpm repo
+modifyrepo_c --mdtype=modules modules.yaml repodata/
 cd ..;
 tar -zcvf rke_rpm_deps.tar.gz rke_rpm_deps;
 rm -rf rke_rpm_deps;
