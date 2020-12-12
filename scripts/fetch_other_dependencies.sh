@@ -20,6 +20,8 @@ do
   docker pull ${image}
   #docker save ${image} | gzip > ${save_image}.tar.gz
   docker save ${image} > ${save_image}.tar
+  tar xzvf ${save_image}.tar
+  rm ${save_image}.tar
 done
 
 #Package other_deps folder
