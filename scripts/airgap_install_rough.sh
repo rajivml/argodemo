@@ -44,4 +44,4 @@ systemctl enable rke2-server
 systemctl start rke2-server
 
 wait_for_healthy
-KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/k9s -n all
+KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/scripts/k9s -n all
