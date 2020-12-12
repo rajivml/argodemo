@@ -1,4 +1,5 @@
-images=(`helm template . | yq -r '..|.image? | select(.)' | sort | uniq`)
+#if it's an crd, directly do cat crd-template.yaml instead of helm template . 
+#images=(`helm template . | yq -r '..|.image? | select(.)' | sort | uniq`)
 
 for image in ${images[@]};
 do
