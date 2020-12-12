@@ -37,7 +37,7 @@ enabled=0
 gpgcheck=0
 EOF
 
-yum install --disablerepo=* --enablerepo="rke_rpm_deps" rke2-server
+yum -y install --disablerepo=* --enablerepo="rke_rpm_deps" rke2-server
 
 
 systemctl enable rke2-server
