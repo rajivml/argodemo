@@ -25,9 +25,12 @@ do
   rm ${save_image}.tar
 done
 
+rm install.yaml
+
 #Package other_deps folder
-cd ..;
-tar -zcvf other_deps.tar.gz other_deps;
+tar czvf other_deps.tar.gz *;
+mv -f other_deps.tar.gz ../other_deps.tar.gz
+cd ..
 rm -rf other_deps;
 
 # -------- other end -----------
