@@ -6,6 +6,7 @@ set -e
 pip3 install yq
 pip3 install jq
 
+rm -rf other_deps
 mkdir other_deps
 cd other_deps
 
@@ -32,6 +33,7 @@ rm -rf other_deps;
 # -------- other end -----------
 
 #----------------- scripts start ####################
+rm -rf scripts
 mkdir scripts
 cd scripts
 curl -sL https://raw.githubusercontent.com/rancher/rke2/488bab0f48b848e408ce399c32e7f5f73ce96129/bundle/bin/rke2-uninstall.sh --output rke2-uninstall.sh
