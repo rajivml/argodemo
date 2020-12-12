@@ -6,7 +6,7 @@ wait_for_healthy(){
 	do
 	  sleep 5
 	done 
-	KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/k9s -n all
+	KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/scripts/k9s -n all
 }
 
 #untar rancher images 
@@ -14,6 +14,8 @@ tar xzvf rke-government-deps-*.tar.gz
 
 mkdir -p /var/lib/rancher/rke2/agent/images/ && \
 zcat rke2-images.linux-amd64.tar.gz > /var/lib/rancher/rke2/agent/images/rke2-images.linux-amd64.tar
+#copy other dependencies
+zcat other_deps.tar.gz > /var/lib/rancher/rke2/agent/images/other_deps.tar
 
 
 mkdir -p /var/lib/rancher/yum_repos
