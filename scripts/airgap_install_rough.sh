@@ -2,7 +2,7 @@ KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 PATH=${PATH}:/var/lib/rancher/rke2/bin
 
 wait_for_healthy(){
-	until KUBECONFIG=/etc/rancher/rke2/rke2.yaml kubectl cluster-info | grep Running
+	until KUBECONFIG=/etc/rancher/rke2/rke2.yaml kubectl cluster-info | grep running
 	do
 	  sleep 5
 	done 
