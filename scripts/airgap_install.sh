@@ -2,14 +2,14 @@ KUBECONFIG=/etc/rancher/rke2/rke2.yaml
 PATH=${PATH}:/var/lib/rancher/rke2/bin
 
 wait_for_healthy(){
-	until KUBECONFIG=/etc/rancher/rke2/rke2.yaml kubectl cluster-info | grep running
-	do
-	  sleep 5
-	done 
-	KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/scripts/k9s -n all
+        until KUBECONFIG=/etc/rancher/rke2/rke2.yaml kubectl cluster-info | grep running
+        do
+          sleep 5
+        done
+        KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/scripts/k9s -n all
 }
 
-#untar rancher images 
+#untar rancher images
 tar xzvf rke-government-deps-*.tar.gz
 
 mkdir -p /var/lib/rancher/rke2/agent/images/ && \
