@@ -3,8 +3,10 @@ set -e
 
 # set variables
 YUM_PACKAGES="unzip container-selinux rke2-server rke2-agent"
-RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/rke2-images.linux-amd64.tar.gz"
-RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/sha256sum-amd64.txt"
+#RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/rke2-images.linux-amd64.tar.gz"
+#RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/sha256sum-amd64.txt"
+RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r2/rke2-images.linux-amd64.tar.gz"
+RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r2/sha256sum-amd64.txt"
 RKE2_VERSION="1.18"
 
 # preflight - check for centos-8 and root user
@@ -27,6 +29,7 @@ yum install -y yum-utils createrepo unzip wget;
 #Install moduletools https://unix.stackexchange.com/questions/567057/download-rpm-and-all-dependencies-on-rhel-centos-8
 wget -O modulemd-tools.rpm http://ftp.riken.jp/Linux/fedora/epel/8/Everything/x86_64/Packages/m/modulemd-tools-0.6-1.el8.noarch.rpm
 dnf -y install modulemd-tools.rpm
+rm modulemd-tools-0.6-1.el8.noarch.rpm
 
 #Install python3 for module-tools
 dnf -y install python3
@@ -34,8 +37,8 @@ dnf -y install pkg-config
 
 #for moduletools gi library
 wget https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/p/python36-gobject-base-3.22.0-6.el7.x86_64.rpm
-ls python36*.rpm
 dnf -y install python36-gobject-base-3.22.0-6.el7.x86_64.rpm
+rm python36-gobject-base-3.22.0-6.el7.x86_64.rpm
 
 # grab and verify rke images
 curl -LO ${RKE_IMAGES_DL_URL};
