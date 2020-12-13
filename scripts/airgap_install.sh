@@ -10,11 +10,13 @@ wait_for_healthy(){
 }
 
 #untar rancher images
+cd /home/sshuser/RKE_Dependencies
 tar xzvf rke-government-deps-*.tar.gz
 
 mkdir -p /var/lib/rancher/rke2/agent/images/ && \
 zcat rke2-images.linux-amd64.tar.gz > /var/lib/rancher/rke2/agent/images/rke2-images.linux-amd64.tar
 #copy other dependencies
+cd /home/sshuser/
 zcat other_deps.tar.gz > /var/lib/rancher/rke2/agent/images/other_deps.tar
 
 
