@@ -29,7 +29,7 @@ yum install -y yum-utils createrepo unzip wget;
 #Install moduletools https://unix.stackexchange.com/questions/567057/download-rpm-and-all-dependencies-on-rhel-centos-8
 wget -O modulemd-tools.rpm http://ftp.riken.jp/Linux/fedora/epel/8/Everything/x86_64/Packages/m/modulemd-tools-0.6-1.el8.noarch.rpm
 dnf -y install modulemd-tools.rpm
-rm modulemd-tools-0.6-1.el8.noarch.rpm
+rm modulemd-tools.rpm
 
 #Install python3 for module-tools
 dnf -y install python3
