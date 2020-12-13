@@ -11,7 +11,7 @@ wait_for_healthy(){
 
 FOLDER_PATH=/home/sshuser
 #untar rancher images
-tar xzvf ${FOLDER_PATH}/RKE_Dependencies/rke-government-deps-*.tar.gz
+tar xzvf ${FOLDER_PATH}/RKE_Dependencies/rke-government-deps-*.tar.gz -C ${FOLDER_PATH}/RKE_Dependencies
 
 mkdir -p /var/lib/rancher/rke2/agent/images/ && \
 zcat ${FOLDER_PATH}/RKE_Dependencies/rke2-images.linux-amd64.tar.gz > /var/lib/rancher/rke2/agent/images/rke2-images.linux-amd64.tar
