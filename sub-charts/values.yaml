@@ -7,5 +7,4 @@ pizzaToppings:
   - peppers
   - onions
 
-mysubchart:
-  dessert: ice cream
+dessert: ice cream

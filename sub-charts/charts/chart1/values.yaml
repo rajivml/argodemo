@@ -7,5 +7,4 @@ pizzaToppings:
   - peppers
   - onions
 
-mysubchart:
-  dessert: frooti
+dessert: frooti
