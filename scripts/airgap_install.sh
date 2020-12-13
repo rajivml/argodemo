@@ -9,19 +9,18 @@ wait_for_healthy(){
         KUBECONFIG=/etc/rancher/rke2/rke2.yaml /home/sshuser/scripts/k9s -n all
 }
 
+FOLDER_PATH=/home/sshuser
 #untar rancher images
-cd /home/sshuser/RKE_Dependencies
-tar xzvf rke-government-deps-*.tar.gz
+tar xzvf ${FOLDER_PATH}/RKE_Dependencies/rke-government-deps-*.tar.gz
 
 mkdir -p /var/lib/rancher/rke2/agent/images/ && \
-zcat rke2-images.linux-amd64.tar.gz > /var/lib/rancher/rke2/agent/images/rke2-images.linux-amd64.tar
+zcat ${FOLDER_PATH}/RKE_Dependencies/rke2-images.linux-amd64.tar.gz > /var/lib/rancher/rke2/agent/images/rke2-images.linux-amd64.tar
 #copy other dependencies
-cd /home/sshuser/
-zcat other_deps.tar.gz > /var/lib/rancher/rke2/agent/images/other_deps.tar
+zcat ${FOLDER_PATH}/other_deps.tar.gz > /var/lib/rancher/rke2/agent/images/other_deps.tar
 
 
 mkdir -p /var/lib/rancher/yum_repos
-tar xzf rke_rpm_deps.tar.gz -C /var/lib/rancher/yum_repos
+tar xzf ${FOLDER_PATH}/RKE_Dependencies/rke_rpm_deps.tar.gz -C /var/lib/rancher/yum_repos
 
 
 mkdir -p /etc/rancher/rke2
