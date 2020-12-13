@@ -3,10 +3,11 @@ set -e
 
 # set variables
 YUM_PACKAGES="unzip container-selinux rke2-server rke2-agent"
-#RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/rke2-images.linux-amd64.tar.gz"
-#RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/sha256sum-amd64.txt"
-RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r2/rke2-images.linux-amd64.tar.gz"
-RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r2/sha256sum-amd64.txt"
+RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/rke2-images.linux-amd64.tar.gz"
+RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/sha256sum-amd64.txt"
+#Not Working, Going to docker for fetching base images Get https://index.docker.io/v2/: dial tcp 52.6.170.51:443: i/o timeout"
+#RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r2/rke2-images.linux-amd64.tar.gz"
+#RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r2/sha256sum-amd64.txt"
 RKE2_VERSION="1.18"
 
 # preflight - check for centos-8 and root user
