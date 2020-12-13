@@ -47,6 +47,7 @@ CHECKSUM_EXPECTED=$(grep "rke2-images.linux-amd64.tar.gz" "sha256sum-amd64.txt" 
 CHECKSUM_ACTUAL=$(sha256sum "rke2-images.linux-amd64.tar.gz" | awk '{print $1}');
 if [ "${CHECKSUM_EXPECTED}" != "${CHECKSUM_ACTUAL}" ]; then echo "FATAL: download sha256 does not match"; exit 1; fi
 rm -f sha256sum-amd64.txt
+echo "Downloaded from ${RKE_IMAGES_DL_URL}"
 
 
 # install rke rpm repo
