@@ -20,5 +20,7 @@ spec:
         image: aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh","-c"]
-        args: ["kubectl delete job support-dump"]
+        args: ["kubectl get job | grep support-dump | cut -d ' ' -f1 | xargs -l1 --no-run-if-empty -- sh -c 'kubectl delete job $0'"]
       restartPolicy: Never
+
+      
