@@ -20,7 +20,8 @@ do
   save_image=$(echo $image | rev | cut -d'/' -f1 | rev | tr ':' '_')
   docker pull ${image}
   #docker save ${image} | gzip > ${save_image}.tar.gz
-  docker save ${image} > ${save_image}.tar
+  #docker save ${image} > ${save_image}.tar -- tags not retaining
+  docker save -o ${save_image}.tar ${image}
   tar xvf ${save_image}.tar
   rm ${save_image}.tar
 done
