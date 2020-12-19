@@ -7,6 +7,7 @@ YUM_PACKAGES="unzip container-selinux rke2-server rke2-agent"
 RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/latest/download/rke2-images.linux-amd64.tar.gz"
 RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/latest/download/sha256sum-amd64.txt"
 RKE2_VERSION="1.18"
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 
 # preflight - check for centos-7 and root user
 if ! ( [[ $(awk -F= '/^ID=/{print $2}' /etc/os-release) = "\"centos\"" ]] && [[ $(awk -F= '/^VERSION_ID=/{print $2}' /etc/os-release) = "\"7\"" ]] ) ; then 
