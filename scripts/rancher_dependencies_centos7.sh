@@ -7,7 +7,6 @@ YUM_PACKAGES="unzip container-selinux rke2-server rke2-agent"
 RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/latest/download/rke2-images.linux-amd64.tar.gz"
 RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/latest/download/sha256sum-amd64.txt"
 RKE2_VERSION="1.18"
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
 
 # preflight - check for centos-7 and root user
 if ! ( [[ $(awk -F= '/^ID=/{print $2}' /etc/os-release) = "\"centos\"" ]] && [[ $(awk -F= '/^VERSION_ID=/{print $2}' /etc/os-release) = "\"7\"" ]] ) ; then 
@@ -49,16 +48,6 @@ gpgcheck=1
 gpgkey=https://rpm.rancher.io/public.key
 EOF
 
-# install hashicorp repo
-cat <<-EOF >"/etc/yum.repos.d/hashicorp.repo"
-[hashicorp]
-name=Hashicorp Stable
-baseurl=https://rpm.releases.hashicorp.com/RHEL/7/\$basearch/stable
-enabled=0
-gpgcheck=1
-gpgkey=https://rpm.releases.hashicorp.com/gpg
-EOF
-
 #Install kubectl
 cat <<-EOF >"/etc/yum.repos.d/kubernetes.repo"
 [kubernetes]
@@ -70,10 +59,20 @@ repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
 
+# install hashicorp repo
+cat <<-EOF >"/etc/yum.repos.d/hashicorp.repo"
+[hashicorp]
+name=Hashicorp Stable
+baseurl=https://rpm.releases.hashicorp.com/RHEL/7/\$basearch/stable
+enabled=0
+gpgcheck=1
+gpgkey=https://rpm.releases.hashicorp.com/gpg
+EOF
+
 # download all rpms and their dependencies
 mkdir rke_rpm_deps;
 cd rke_rpm_deps;
-yum install --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="rancher-rke2-latest" --enablerepo="kubernetes" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
+echo "y" | yum -y install --enablerepo="rancher-rke2-common-latest" --enablerepo="hashicorp" --enablerepo="kubernetes" --enablerepo="rancher-rke2-latest" --releasever=/ --installroot=$(pwd) --downloadonly --downloaddir $(pwd) ${YUM_PACKAGES};
 createrepo -v .;
 cd ..;
 tar -zcvf rke_rpm_deps.tar.gz rke_rpm_deps;
