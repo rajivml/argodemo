@@ -20,7 +20,7 @@ if [ "$EUID" -ne 0 ] ; then
 fi
 
 # create a working directory, install dependency collection dependencies
-export workdir=rke-government-deps-$(date +"%y-%m-%d-%k-%M-%S");
+export workdir=rke-government-deps-$(date +"%y-%m-%d-%H-%M-%S");
 mkdir $workdir;
 cd $workdir;
 yum install -y yum-utils createrepo unzip;
