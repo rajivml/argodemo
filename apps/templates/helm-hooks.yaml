@@ -17,24 +17,6 @@ spec:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
 
-    # helm specific config
-    helm:
-      # Extra parameters to set (same as setting through values.yaml, but these take precedence)
-      parameters:
-      - name: "ingress.enabled"
-        value: "true"
-        forceString: true # ensures that value is treated as a string
-
-      # Values file as block file
-      values: |
-        ingress:
-          enabled: true
-          hosts:
-            - mydomain.example.com
-          annotations: {}
-          labels: {}
-            hit-me-hard: "true"
-
   # Sync policy
   syncPolicy:
     automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
