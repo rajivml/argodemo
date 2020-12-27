@@ -1,3 +1,10 @@
+imageCredentials:
+  name: chart2-registry-cred
+  registry: "chart2-registry"
+  username: "chart2-user"
+  password: "chart2-password"
+namespace: subcharts
+
 favorite:
   drink: coffee
   food: pizza
@@ -8,3 +15,4 @@ pizzaToppings:
   - onions
 
 dessert: maaza
+imageTag: "1.0"

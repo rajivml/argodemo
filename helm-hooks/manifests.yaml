@@ -50,6 +50,14 @@ spec:
       containers:
         - name: main
           image: nginx:latest
+          env:
+          - name: IMAGE_TAG
+            valueFrom:
+              configMapKeyRef:
+                name: service-fabric-config
+                key: IMAGE_TAG
+          - name: IMAGE_TAG_VALUES
+            value: "{{ .Values.imageTag }}"
 ---
 apiVersion: v1
 kind: Service

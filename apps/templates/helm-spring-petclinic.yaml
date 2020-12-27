@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-hooks
+  name: helm-spring-petclinic
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   destination:
-    namespace: helm-hooks
+    namespace: petclinic
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: helm-hooks
+    path: spring-petclinic
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
 
@@ -24,6 +24,21 @@ spec:
       - name: "ingress.enabled"
         value: "true"
         forceString: true # ensures that value is treated as a string
+
+      # # Release name override (defaults to application name)
+      # releaseName: subcharts
+
+      # Helm values files for overriding values in the helm chart
+      # The path is relative to the spec.source.path directory defined above
+      valueFiles:
+      - values.yaml
+
+      #https://github.com/argoproj/argo-cd/issues/1930
+      # valuesLiteral:
+      # - name: values.yaml
+      #   value: |
+      #      param1: value1
+      #      param2: value2
 
       # Values file as block file
       values: |

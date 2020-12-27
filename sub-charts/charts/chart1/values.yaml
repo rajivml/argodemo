@@ -1,3 +1,10 @@
+imageCredentials:
+  name: chart1-registry-cred
+  registry: "chart1-registry"
+  username: "chart1-user"
+  password: "chart1-password"
+namespace: subcharts
+
 favorite:
   drink: coffee
   food: pizza
@@ -8,3 +15,4 @@ pizzaToppings:
   - onions
 
 dessert: frooti
+imageTag: "1.0"

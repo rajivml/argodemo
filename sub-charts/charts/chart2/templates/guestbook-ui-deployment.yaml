@@ -27,4 +27,19 @@ spec:
                 key: dessert
           - name: EXTRAS
             value: "{{ .Values.dessert }}"
+          - name: IMAGE_CREDENTIALS_NAME
+            value: {{ $imageCredentialsName }}
+          - name: IMAGE_CREDENTIALS_REGISTRY
+            value: {{ $imageCredentials.registry }}
+          - name: REGISTRY_USERNAME
+            value: {{ $imageCredentials.username }}
+          - name: REGISTRY_PASSWORD
+            value: {{ $imageCredentials.password }}
+          - name: IMAGE_TAG
+            valueFrom:
+              configMapKeyRef:
+                name: service-fabric-config
+                key: IMAGE_TAG
+          - name: IMAGE_TAG_VALUES
+            value: "{{ {{ $imageTag }}"
 

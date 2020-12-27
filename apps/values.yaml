@@ -2,5 +2,35 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/argoproj/argocd-example-apps
+    repoURL: https://github.com/rajivml/argodemo
     targetRevision: HEAD
+  retry:
+    limit: 3 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+    backoff:
+      duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+      factor: 2 # a factor to multiply the base duration after each failed retry
+      maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
+      
+ingress:
+  host: IP_ADDRESS_OF_KUBERNETES_INSTANCE
+orchestrator:
+  endpoint: ORCHESTRATOR_IP:ORCHESTRATOR_PORT
+identityserver:
+  endpoint: IDENTITY_SERVER_IP:IDENTITY_SERVER_PORT
+identity:
+  accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjUzRjE2Q0UyQjg3RTQ1RUU1RDgwOTRERjc5NjJEN0MzOTYxNjcyN0UiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJVX0ZzNHJoLVJlNWRnSlRmZVdMWHc1WVdjbjQifQ
+sql:
+  host: DATABASE_IP
+  username: admin
+  password: password
+dbname:
+  aiHelper: ai_helper
+  aiDeployer: ai_deployer
+  aiPkgManager: ai_pkgmanager
+  aiTrainer: ai_trainer
+  aiAppManager: ai_appmanager
+registry:
+  Namespace: default
+  isAirgap: false
+
+imageTag: "2.0"

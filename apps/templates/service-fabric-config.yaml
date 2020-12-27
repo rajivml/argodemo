@@ -1,0 +1,19 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: service-fabric-config
+  labels:
+    secret-copier: yes
+data:
+  # Configuration values can be set as key-value properties
+  database: mongodb
+  database_uri: mongodb://localhost:27017
+  ingressHost: {{ .Values.ingress.host }}
+  orchestratorEndpoint: {{ .Values.orchestrator.endpoint }}
+  identityserverEndpoint: {{ .Values.identityserver.endpoint }}
+  accessToken: {{ .Values.identity.accessToken }}
+  sqlHost: {{ .Values.sql.host }}
+  sqlUsername: {{ .Values.sql.username }}
+  sqlPassword: {{ .Values.sql.password }}
+  imageTag: {{ .Values.imageTag }}
+
