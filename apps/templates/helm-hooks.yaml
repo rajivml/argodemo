@@ -48,9 +48,9 @@ spec:
     retry:
       limit: {{ .Values.spec.retry.limit }} # number of failed sync attempt retries; unlimited number of attempts if less than 0
       backoff:
-        duration: {{ .Values.spec.backoff.duration }} # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
-        factor: {{ .Values.spec.backoff.factor }} # a factor to multiply the base duration after each failed retry
-        maxDuration: {{ .Values.spec.backoff.maxDuration }} # the maximum amount of time allowed for the backoff strategy
+        duration: {{ .Values.spec.retry.backoff.duration }} # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: {{ .Values.spec.retry.backoff.factor }} # a factor to multiply the base duration after each failed retry
+        maxDuration: {{ .Values.spec.retry.backoff.maxDuration }} # the maximum amount of time allowed for the backoff strategy
 
   # Ignore differences at the specified json pointers
   ignoreDifferences:
