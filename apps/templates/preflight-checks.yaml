@@ -1,35 +1,35 @@
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: "preflight-checks"
-  namespace: default
-  generateName: preflight-checks
-  annotations:
-    helm.sh/hook: pre-install
-    helm.sh/hook-weight: "-3"
-    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
-spec:
-  backoffLimit: 0
-  template:
-    spec:
-      imagePullSecrets:
-      - name: kotsadm-replicated-registry
-      containers:
-      - name: preflights-aif
-        image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
-        imagePullPolicy: Always
-        command: ["bash", "run-checks.sh"]
-        args: ["-s", "{{ .Values.sql.host }}",
-        "-u", "{{ .Values.sql.username }}",
-        "-p", "{{ .Values.sql.password }}",
-        "-o", "{{ .Values.orchestrator.endpoint }}",
-        "-v", "{{ .Values.identityserver.endpoint }}",
-        "-h", "{{ .Values.ingress.host }}",
-        "-i", "{{ .Values.identity.accessToken }}",
-        "-e", 'onebox',
-        "--helper-db", "{{ .Values.dbname.aiHelper }}",
-        "--deployer-db", "{{ .Values.dbname.aiDeployer }}",
-        "--pkgmanager-db", "{{ .Values.dbname.aiPkgManager }}",
-        "--trainer-db", "{{ .Values.dbname.aiTrainer }}",
-        "--appmanager-db", "{{ .Values.dbname.aiAppManager }}"]
-      restartPolicy: Never
+# apiVersion: batch/v1
+# kind: Job
+# metadata:
+#   name: "preflight-checks"
+#   namespace: default
+#   generateName: preflight-checks
+#   annotations:
+#     helm.sh/hook: pre-install
+#     helm.sh/hook-weight: "-3"
+#     helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
+# spec:
+#   backoffLimit: 0
+#   template:
+#     spec:
+#       imagePullSecrets:
+#       - name: kotsadm-replicated-registry
+#       containers:
+#       - name: preflights-aif
+#         image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
+#         imagePullPolicy: Always
+#         command: ["bash", "run-checks.sh"]
+#         args: ["-s", "{{ .Values.sql.host }}",
+#         "-u", "{{ .Values.sql.username }}",
+#         "-p", "{{ .Values.sql.password }}",
+#         "-o", "{{ .Values.orchestrator.endpoint }}",
+#         "-v", "{{ .Values.identityserver.endpoint }}",
+#         "-h", "{{ .Values.ingress.host }}",
+#         "-i", "{{ .Values.identity.accessToken }}",
+#         "-e", 'onebox',
+#         "--helper-db", "{{ .Values.dbname.aiHelper }}",
+#         "--deployer-db", "{{ .Values.dbname.aiDeployer }}",
+#         "--pkgmanager-db", "{{ .Values.dbname.aiPkgManager }}",
+#         "--trainer-db", "{{ .Values.dbname.aiTrainer }}",
+#         "--appmanager-db", "{{ .Values.dbname.aiAppManager }}"]
+#       restartPolicy: Never
