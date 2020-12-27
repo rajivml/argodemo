@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.aiApp.name }}
+spec:
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ .Values.aiApp.name }}
+  replicas: {{ .Values.aiApp.replicaCount }}
+  template:
+    metadata: 
+      labels:
+        app: {{ .Values.aiApp.name }}
+      {{- if .Values.aiApp.releaseTime }}
+        {{- if ne .Values.aiApp.releaseTime "N" }}
+      annotations:
+        timestamp: {{ .Values.aiApp.releaseTime | quote }}
+        {{- end }}
+      {{- end }}
+        checksum/secret: {{ include (print $.Template.BasePath "/ai-app-secrets.yaml") . | sha256sum | trunc 63 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.aiApp.imagePullSecrets.name }}
+      volumes:
+        - name: keyvault
+          secret:
+            secretName: {{ .Values.aiApp.secrets }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      terminationGracePeriodSeconds: 60
+      containers:
+        - image: "{{ .Values.aiApp.image.repository_url }}/{{ .Values.project_id }}/{{ .Values.aiApp.image.repository_name }}:{{ .Values.aiApp.image.tag }}"
+          imagePullPolicy: {{ .Values.aiApp.image.pullPolicy }}
+          name: {{ .Values.aiApp.name }}
+          resources:
+{{ toYaml .Values.aiApp.resources | indent 12 }}
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 20"]
+          ports:
+          - containerPort: {{ .Values.aiApp.port }}
+          volumeMounts:
+          - name: keyvault
+            mountPath: /var/keyvault/secrets
+          readinessProbe:
+            httpGet:
+              path: "{{ .Values.ingress.aiApp.path }}{{ .Values.readinessProbeUrl }}"
+              port: {{ .Values.aiApp.port }}
+            timeoutSeconds: 2
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          env:
+          - name: APP_PUBLIC_PATH
+            value: "{{ .Values.aiApp.publicPath }}"
+         #----------------------- End Secrets ---------------------------#
+          - name: PKGMANAGER_URL
+            value: "{{ .Values.aiApp.serviceAccessPath.aiPkgManagerUrl }}"
+          - name: DEPLOYER_URL
+            value: "{{ .Values.aiApp.serviceAccessPath.aiDeployerUrl }}"
+          - name: TRAINER_URL
+            value: "{{ .Values.aiApp.serviceAccessPath.aiTrainerUrl }}"
+          - name: HELPER_URL
+            value: "{{ .Values.aiApp.serviceAccessPath.aiHelperUrl }}"
+          - name: APPMANAGER_URL
+            value: "{{ .Values.aiApp.serviceAccessPath.aiAppManagerUrl }}"
+          - name: IDENTITY_SERVER_URL
+            value: "{{ .Values.aiApp.identityServer.accessUrl }}"
+          - name: REDIRECT_URL
+            value: "{{ .Values.aiApp.identityServer.redirectUrl }}"
+          - name: IS_ON_PREM
+            value: "{{ .Values.isOnPrem }}"
+          - name: SCOPES
+            value: "{{ .Values.scopes}}"
+          - name: APP_LAUNCH_URL_TEMPLATE
+            value: "{{ .Values.aiApp.appLaunchUrlTemplate}}"
+          {{- if eq .Values.featuremanagement.launchdarkly.enabled true }}  
+          - name: LAUNCH_DARKLY_ENV_KEY 
+            valueFrom:  
+              secretKeyRef: 
+                name: {{ .Values.aiApp.secrets }} 
+                key: LAUNCH_DARKLY_ENV_KEY  
+          {{- end }}
+          {{- if eq .Values.isOnPrem true }}
+          - name: IS_CLIENT_ID
+            valueFrom:
+              configMapKeyRef:
+                name: is-client-config
+                key: CLIENT_ID
+          {{- else }}
+          - name: IS_CLIENT_ID
+            value: "{{ .Values.aiApp.identityServer.clientId }}"
+          {{- end }}
+          - name: AIF_APP_ASSETS_PATH
+            value: "{{ .Values.aiApp.assetsPath }}"
+          - name: FEATURE_FLAGS
+            value: "{{ .Values.featuremanagement.onprem.flags }}"

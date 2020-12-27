@@ -36,6 +36,12 @@ spec:
             httpGet:
               path: /
               port: http
+          env:
+          - name: IMAGE_TAG
+            valueFrom:
+              configMapKeyRef:
+                name: service-fabric-config
+                key: IMAGE_TAG
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
@@ -50,3 +56,4 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+

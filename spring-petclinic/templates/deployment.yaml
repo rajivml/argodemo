@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: spring-petclinic
+  template:
+    metadata:
+      labels:
+        app: spring-petclinic
+    spec:
+      containers:
+      # modify the following line with your Docker Hub account name
+      - image: uipath/spring-petclinic:latest
+        name: spring-petclinic
+        ports:
+        - containerPort: 8080
+        env:
+        - name: IMAGE_TAG
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: IMAGE_TAG
