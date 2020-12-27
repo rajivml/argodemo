@@ -1,13 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: delete-job
+  name: label-configmap
   namespace: default
-  generateName: delete-job
+  generateName: label-configmap
   annotations:
-    helm.sh/hook: pre-install
-    helm.sh/hook-weight: "-1"
-    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
+    argocd.argoproj.io/sync-wave: "-9"
 spec:
   backoffLimit: 0
   template:
