@@ -6,7 +6,7 @@ metadata:
   labels:
     environment: production
     app: servicefabric
-    secret-copier: yes
+    secret-copier: "yes"
   annotations:
     argocd.argoproj.io/sync-wave: "-10"
 data:
