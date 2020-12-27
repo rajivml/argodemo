@@ -20,7 +20,7 @@ orchestrator:
 identityserver:
   endpoint: IDENTITY_SERVER_IP:IDENTITY_SERVER_PORT
 identity:
-  accessToken: eyJhbGciOiJSUzI1NiIsImtpZCI6IjUzRjE2Q0UyQjg3RTQ1RUU1RDgwOTRERjc5NjJEN0MzOTYxNjcyN0UiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJVX0ZzNHJoLVJlNWRnSlRmZVdMWHc1WVdjbjQifQ
+  accessToken: abcde
 sql:
   host: DATABASE_IP
   username: admin
