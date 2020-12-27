@@ -15,5 +15,5 @@ data:
   sqlHost: {{ .Values.sql.host }}
   sqlUsername: {{ .Values.sql.username }}
   sqlPassword: {{ .Values.sql.password }}
-  imageTag: {{ .Values.imageTag }}
+  imageTag: "{{ .Values.imageTag }}"
 
