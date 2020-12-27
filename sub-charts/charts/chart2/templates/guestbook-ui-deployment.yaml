@@ -28,13 +28,13 @@ spec:
           - name: EXTRAS
             value: "{{ .Values.dessert }}"
           - name: IMAGE_CREDENTIALS_NAME
-            value: {{ $imageCredentials.name }}
+            value: {{ $imageCredentialsName }}
           - name: IMAGE_CREDENTIALS_REGISTRY
-            value: {{ $imageCredentials.registry }}
+            value: {{ $imageCredentialsRegistry }}
           - name: REGISTRY_USERNAME
-            value: {{ $imageCredentials.username }}
+            value: {{ $imageCredentialsUsername }}
           - name: REGISTRY_PASSWORD
-            value: {{ $imageCredentials.password }}
+            value: {{ $imageCredentialsPassword }}
           - name: IMAGE_TAG
             valueFrom:
               configMapKeyRef:
