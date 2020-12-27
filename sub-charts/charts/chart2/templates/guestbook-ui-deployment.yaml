@@ -28,7 +28,7 @@ spec:
           - name: EXTRAS
             value: "{{ .Values.dessert }}"
           - name: IMAGE_CREDENTIALS_NAME
-            value: {{ $imageCredentialsName }}
+            value: {{ $imageCredentials.name }}
           - name: IMAGE_CREDENTIALS_REGISTRY
             value: {{ $imageCredentials.registry }}
           - name: REGISTRY_USERNAME
