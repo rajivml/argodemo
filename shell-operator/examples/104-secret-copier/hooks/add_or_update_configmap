@@ -54,6 +54,7 @@ hook::trigger() {
     do
       # figure out the namespace where the secret update happened
       secret_namespace=$(jq --arg keyvar "$secret" -r '.[] | select(.object.metadata.name == $keyvar) | .object.metadata.namespace' $BINDING_CONTEXT_PATH)
+      echo "AddOrUpdate: kubectl -n $secret_namespace get configmap $secret -o json TargetNamespace: $namespace"
       kubectl -n $secret_namespace get configmap $secret -o json | \
         jq -r ".metadata.namespace=\"${namespace}\" |
                 .metadata |= with_entries(select([.key] | inside([\"name\", \"namespace\"])))" \

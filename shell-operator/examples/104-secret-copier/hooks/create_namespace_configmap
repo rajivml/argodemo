@@ -35,6 +35,7 @@ hook::trigger() {
     do
       for secret in $(kubectl -n $sec_namespace get configmap -l secret-copier=yes -o name);
       do
+	echo "CreateNamespaceHook: kubectl -n $sec_namespace get $secret -o json TargetNamespace: $namespace"
         kubectl -n $sec_namespace get $secret -o json | jq -r ".metadata.namespace=\"${namespace}\" | .metadata |= with_entries(select([.key] | inside([\"name\", \"namespace\"])))" | kubectl::replace_or_create
       done
     done
