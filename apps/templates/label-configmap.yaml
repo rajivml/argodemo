@@ -18,5 +18,5 @@ spec:
         image: aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh","-c"]
-        args: ["kubectl label configmap service-fabric-config secret-copier=yes"]
+        args: ["kubectl label --overwrite configmap service-fabric-config secret-copier=yes"]
       restartPolicy: Never
