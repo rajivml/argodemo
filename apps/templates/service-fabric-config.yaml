@@ -7,7 +7,6 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
     secret-copier: yes
-namespace: default
 data:
   # Configuration values can be set as key-value properties
   database: mongodb
