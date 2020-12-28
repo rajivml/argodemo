@@ -2,7 +2,7 @@
 set -e
 
 # set variables
-YUM_PACKAGES="unzip container-selinux rke2-server rke2-agent"
+YUM_PACKAGES="zip unzip container-selinux rke2-server rke2-agent git"
 #working
 #RKE_IMAGES_DL_URL="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/rke2-images.linux-amd64.tar.gz"
 #RKE_IMAGES_DL_SHASUM="https://github.com/rancher/rke2/releases/download/v1.18.12%2Brke2r1/sha256sum-amd64.txt"
