@@ -1,0 +1,22 @@
+resources:
+- argocd.yaml
+images:
+- name: gcr.io/heptio-images/ks-guestbook-demo
+  newName: DOCKER_REGISTRY_IP/gcr.io/heptio-images/ks-guestbook-demo
+  newTag: "0.1"
+patches:
+- path: ../patches/patch_image_pull_secret_daemonset.yaml
+  target:
+    kind: DaemonSet
+- path: ../patches/patch_image_pull_secret_deployment.yaml
+  target:
+    kind: Deployment
+- path: ../patches/patch_image_pull_secret_job.yaml
+  target:
+    kind: Job
+- path: ../patches/patch_image_pull_secret_pod.yaml
+  target:
+    kind: Pod
+- path: ../patches/patch_image_pull_secret_statefulset.yaml
+  target:
+    kind: SatefulSet
