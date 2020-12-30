@@ -21,13 +21,13 @@ spec:
         release: {{ .Release.Name }}
     spec:
       imagePullSecrets:
-        {{- if eq .Values.isOnPrem "true" }}
+        {{- if eq .Values.isOnPrem true }}
         - name: {{ .Values.imagePullSecret }}
         {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           # image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          {{- if eq .Values.isOnPrem "true" }}
+          {{- if eq .Values.isOnPrem true }}
           image: {{ printf "%s/%s:%s" .Values.dockerRegistryIP .Values.image.repository .Values.image.tag }}
           {{- else }}
           image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag }}
