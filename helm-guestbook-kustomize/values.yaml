@@ -45,3 +45,6 @@ tolerations: []
 affinity: {}
 
 imageTag: "1.0"
+
+sentinel:
+  enabled: false
