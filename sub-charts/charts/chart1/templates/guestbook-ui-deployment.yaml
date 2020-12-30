@@ -1,3 +1,7 @@
+{{- $imageCredentialsName := include "imageCredentials.name" . -}}
+{{- $imageCredentialsRegistry := include "imageCredentials.registry" . -}}
+{{- $namespaceValue := include "namespace.value" . -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -31,10 +35,6 @@ spec:
             value: {{ $imageCredentialsName }}
           - name: IMAGE_CREDENTIALS_REGISTRY
             value: {{ $imageCredentialsRegistry }}
-          - name: REGISTRY_USERNAME
-            value: {{ $imageCredentialsUsername }}
-          - name: REGISTRY_PASSWORD
-            value: {{ $imageCredentialsPassword }}
           - name: IMAGE_TAG
             valueFrom:
               configMapKeyRef:
