@@ -1,0 +1,3 @@
+https://kubectl.docs.kubernetes.io/guides/config_management/components/
+https://github.com/kubernetes-sigs/kustomize/blob/master/examples/components.md
+https://github.com/ioandr/kustomize-example/tree/master/complex-composition
