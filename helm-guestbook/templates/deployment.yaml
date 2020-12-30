@@ -22,7 +22,12 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          # image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- if eq .Values.isOnPrem "true" }}
+          image: {{ printf "%s/%s:%s" ${DOCKER_REGISTRY_IP} .Values.image.repository .Values.image.tag }}
+          {{- else }}
+          image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag }}
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -42,6 +47,11 @@ spec:
               configMapKeyRef:
                 name: service-fabric-config
                 key: IMAGE_TAG
+          - name: DOCKER_REGISTRY_IP
+            valueFrom:
+              configMapKeyRef:
+                name: docker-registry-config
+                key: DOCKER_REGISTRY_IP
           - name: IMAGE_TAG_VALUES
             value: "{{ .Values.imageTag }}"
           resources:
