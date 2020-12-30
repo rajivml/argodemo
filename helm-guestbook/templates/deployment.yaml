@@ -1,4 +1,4 @@
-{{- $dockerRegistryIP := index .Values "dockerVars" 0 -}}
+{{- $dockerRegistryIP := index "dockerVars" 0 -}}
 {{- $_ := set . "dockerRegistryIP" $dockerRegistryIP -}}
 
 apiVersion: apps/v1
