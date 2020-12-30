@@ -1,5 +1,6 @@
-{{- $dockerRegistryIP := index "dockerVars" 0 -}}
-{{- $_ := set . "dockerRegistryIP" $dockerRegistryIP -}}
+
+{{- $dockerVars := include "dockerVars" . -}}
+{{- $dockerRegistryIP := index $dockerVars 0 . -}}
 
 apiVersion: apps/v1
 kind: Deployment
