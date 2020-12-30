@@ -20,18 +20,9 @@ spec:
         app: {{ template "helm-guestbook.name" . }}
         release: {{ .Release.Name }}
     spec:
-      imagePullSecrets:
-        {{- if eq .Values.isOnPrem true }}
-        - name: {{ .Values.imagePullSecret }}
-        {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          # image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          {{- if eq .Values.isOnPrem true }}
-          image: {{ printf "%s/%s:%s" .Values.dockerRegistryIP .Values.image.repository .Values.image.tag }}
-          {{- else }}
-          image: {{ printf "%s:%s" .Values.image.repository .Values.image.tag }}
-          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -51,11 +42,6 @@ spec:
               configMapKeyRef:
                 name: service-fabric-config
                 key: IMAGE_TAG
-          - name: DOCKER_REGISTRY_IP
-            valueFrom:
-              configMapKeyRef:
-                name: docker-registry-config
-                key: DOCKER_REGISTRY_IP
           - name: IMAGE_TAG_VALUES
             value: "{{ .Values.imageTag }}"
           resources:
@@ -72,4 +58,3 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
-
