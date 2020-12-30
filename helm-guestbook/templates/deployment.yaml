@@ -1,8 +1,6 @@
 {{- $dockerRegistryIP := index .Values "dockerVars" 0 -}}
 {{- $_ := set . "dockerRegistryIP" $dockerRegistryIP -}}
 
-{{- include "dockerVars" $myDict -}}
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
