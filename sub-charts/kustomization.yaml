@@ -20,5 +20,3 @@ patches:
 - path: overlays/patch_image_pull_secret_statefulset.yaml
   target:
     kind: SatefulSet
-
-namePrefix: kustomize-

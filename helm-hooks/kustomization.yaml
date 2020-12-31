@@ -1,9 +1,12 @@
 resources:
 - ./all.yaml
 images:
-- name: gcr.io/heptio-images/ks-guestbook-demo
-  newName: DOCKER_REGISTRY_IP/gcr.io/heptio-images/ks-guestbook-demo
-  newTag: "0.2"
+- name: alpine
+  newName: DOCKER_REGISTRY_IP/alpine
+  newTag: "latest"
+- name: ngnix
+  newName: DOCKER_REGISTRY_IP/ngnix
+  newTag: "latest"
 patches:
 - path: overlays/patch_image_pull_secret_daemonset.yaml
   target:
