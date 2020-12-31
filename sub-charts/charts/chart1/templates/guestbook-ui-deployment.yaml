@@ -40,7 +40,5 @@ spec:
               configMapKeyRef:
                 name: service-fabric-config
                 key: IMAGE_TAG
-          - name: IMAGE_TAG_VALUES
-            value: "{{ {{ $imageTag }}"
 
 
