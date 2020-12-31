@@ -1,5 +1,9 @@
 resources:
-- base/manifests.yaml
+- backend.yaml
+- frontend.yaml
+- upgrade-sql-schema.yaml
+- maintenance-page-up.yaml
+- maintenance-page-down.yaml
 images:
 - name: nginx:latest
   newName: DOCKER_REGISTRY_IP/nginx
