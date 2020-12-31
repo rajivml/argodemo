@@ -1,5 +1,5 @@
 resources:
-- ./all.yaml
+- ./manifests.yaml
 images:
 - name: nginx:latest
   newName: DOCKER_REGISTRY_IP/nginx
