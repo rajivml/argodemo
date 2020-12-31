@@ -1,0 +1,19 @@
+global:
+  imageCredentials:
+    name: registry-cred
+    registry: "parentregistry"
+    username: "parent-user"
+    password: "parent-password"
+  namespace: subcharts
+  imageTag: "1.0"
+
+favorite:
+  drink: coffee
+  food: pizza
+pizzaToppings:
+  - mushrooms
+  - cheese
+  - peppers
+  - onions
+
+dessert: ice cream

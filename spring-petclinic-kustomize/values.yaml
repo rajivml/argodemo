@@ -1,0 +1,16 @@
+# Default values for helm-guestbook.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: uipath/spring-petclinic
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP #@ Possible Values are ClusterIP, NodePort and LoadBalancer
+  port: 80
+
+imageTag: "1.0"

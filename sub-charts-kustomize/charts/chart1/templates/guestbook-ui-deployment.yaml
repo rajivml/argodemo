@@ -1,0 +1,44 @@
+{{- $imageCredentialsName := include "imageCredentials.name" . -}}
+{{- $imageCredentialsRegistry := include "imageCredentials.registry" . -}}
+{{- $namespaceValue := include "namespace.value" . -}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook-ui-1
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guestbook-ui-1
+  template:
+    metadata:
+      labels:
+        app: guestbook-ui-1
+    spec:
+      containers:
+      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+        name: guestbook-ui-1
+        ports:
+        - containerPort: 80
+        env:
+          - name: DESSERT
+            valueFrom:
+              configMapKeyRef:
+                name: chart1
+                key: dessert
+          - name: EXTRAS
+            value: "{{ .Values.dessert }}"
+          - name: IMAGE_CREDENTIALS_NAME
+            value: {{ $imageCredentialsName }}
+          - name: IMAGE_CREDENTIALS_REGISTRY
+            value: {{ $imageCredentialsRegistry }}
+          - name: IMAGE_TAG
+            valueFrom:
+              configMapKeyRef:
+                name: service-fabric-config
+                key: IMAGE_TAG
+
+
