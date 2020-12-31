@@ -3,6 +3,7 @@ resources:
 - frontend.yaml
 - maintenance-page-up.yaml
 - maintenance-page-down.yaml
+- upgrade-sql-schema.yaml
 images:
 - name: nginx:latest
   newName: DOCKER_REGISTRY_IP/nginx
