@@ -1,14 +1,14 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: upgrade-sql-schema
+  generateName: upgrade-sql
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
   template:
     spec:
       containers:
-        - name: upgrade-sql-schema
+        - name: upgrade-sql
           image: alpine:latest
           command: ["sleep", "5"]
       restartPolicy: Never
