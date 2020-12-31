@@ -1,5 +1,5 @@
 resources:
-- ./manifests.yaml
+- manifests.yaml
 images:
 - name: alpine
   newName: DOCKER_REGISTRY_IP/alpine
