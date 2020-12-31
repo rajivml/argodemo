@@ -1,5 +1,6 @@
 resources:
-- ./all.yaml
+- guestbook-ui-deployment.yaml
+- guestbook-ui-svc.yaml
 images:
 - name: gcr.io/heptio-images/ks-guestbook-demo
   newName: DOCKER_REGISTRY_IP/gcr.io/heptio-images/ks-guestbook-demo
