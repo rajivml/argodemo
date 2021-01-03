@@ -1,0 +1,78 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: provision
+  name: aifabricdeployment
+  namespace: default
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      serviceAccountName: provision
+      imagePullSecrets:
+      - name: kotsadm-replicated-registry
+      containers:
+      - image: 'aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1'
+        name: daemon-script
+        imagePullPolicy: Always
+        env:
+        - name: INGRESS_HOST
+          value: "{{ .Values.ingress.host }}"
+        - name: ORCHESTRATOR_ENDPOINT
+          value: "{{ .Values.orchestrator.endpoint }}"
+        - name: IDENTITY_SERVER_ENDPOINT
+          value: "{{ .Values.identityserver.endpoint }}"
+        - name: IS_ACCESS_TOKEN
+          value: "{{ .Values.identity.accessToken }}"
+        - name: PLATFORM
+          value: 'onebox'
+        - name: SQL_HOST
+          value: "{{ .Values.sql.host }}"
+        - name: SQL_USERNAME
+          value: "{{ .Values.sql.username }}"
+        - name: SQL_PASSWORD
+          value: "{{ .Values.sql.password }}"
+        - name: SERVICES_REGISTRY
+          value: aifabriconprem.azurecr.io
+        - name: SERVICES_PROJECT
+          value: on-prem
+        - name: REPLICATED_REGISTRY
+          value: aifabriconprem.azurecr.io
+        - name: REPLICATED_PROJECT
+          value: on-prem
+        - name: REPLICATED_NAMESPACE
+          value: default
+        - name: HELPER_DBNAME
+          value: "{{ .Values.dbname.aiHelper }}"
+        - name: PKGMANAGER_DBNAME
+          value: "{{ .Values.dbname.aiPkgManager }}"
+        - name: DEPLOYER_DBNAME
+          value: "{{ .Values.dbname.aiDeployer }}"
+        - name: TRAINER_DBNAME
+          value: "{{ .Values.dbname.aiTrainer }}"
+        - name: APPMANAGER_DBNAME
+          value: "{{ .Values.dbname.aiAppManager }}"
+        - name: TEST_PATH_STATUS
+          value: 'disable'
+        - name: APP_RELEASE
+          value: 'v20.10.1.1'
+        - name: HELPER_RELEASE
+          value: 'v20.10.1'
+        - name: PKGMANAGER_RELEASE
+          value: 'v20.10.1'
+        - name: DEPLOYER_RELEASE
+          value: 'v20.10.1.1'
+        - name: TRAINER_RELEASE
+          value: 'v20.10.1'
+        - name: APPMANAGER_RELEASE
+          value: 'v20.9.2'
+        - name: APPMANAGER_HELPER_RELEASE
+          value: 'v20.9.2'
+        - name: DATAMANAGER_RELEASE
+          value: '20.9.1-prod'
+        - name: IS_AIRGAP
+          value: "false"
+        - name: METADATA_BRANCH
+          value: master
+      restartPolicy: Never

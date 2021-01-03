@@ -31,5 +31,7 @@ dbname:
   aiPkgManager: ai_pkgmanager
   aiTrainer: ai_trainer
   aiAppManager: ai_appmanager
+registry:
+  url: 127.0.0.1
 
 imageTag: "2.0"

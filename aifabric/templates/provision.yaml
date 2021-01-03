@@ -13,46 +13,88 @@ spec:
       imagePullSecrets:
       - name: kotsadm-replicated-registry
       containers:
-      - image: 'aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1'
+      - image: aifabriconprem.azurecr.io/on-prem/daemon-script:v20.10.1
         name: daemon-script
         imagePullPolicy: Always
         env:
         - name: INGRESS_HOST
-          value: "{{ .Values.ingress.host }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: ingressHost
         - name: ORCHESTRATOR_ENDPOINT
-          value: "{{ .Values.orchestrator.endpoint }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: orchestratorEndpoint
         - name: IDENTITY_SERVER_ENDPOINT
-          value: "{{ .Values.identityserver.endpoint }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: identityserverEndpoint
         - name: IS_ACCESS_TOKEN
-          value: "{{ .Values.identity.accessToken }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: accessToken
         - name: PLATFORM
           value: 'onebox'
         - name: SQL_HOST
-          value: "{{ .Values.sql.host }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: sqlHost
         - name: SQL_USERNAME
-          value: "{{ .Values.sql.username }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: sqlUsername
         - name: SQL_PASSWORD
-          value: "{{ .Values.sql.password }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: sqlPassword
         - name: SERVICES_REGISTRY
-          value: aifabriconprem.azurecr.io
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: registryURL
         - name: SERVICES_PROJECT
           value: on-prem
         - name: REPLICATED_REGISTRY
-          value: aifabriconprem.azurecr.io
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: registryURL
         - name: REPLICATED_PROJECT
           value: on-prem
         - name: REPLICATED_NAMESPACE
           value: default
         - name: HELPER_DBNAME
-          value: "{{ .Values.dbname.aiHelper }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: helperDBName
         - name: PKGMANAGER_DBNAME
-          value: "{{ .Values.dbname.aiPkgManager }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: pkgDBName
         - name: DEPLOYER_DBNAME
-          value: "{{ .Values.dbname.aiDeployer }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: deployerDBName
         - name: TRAINER_DBNAME
-          value: "{{ .Values.dbname.aiTrainer }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: trainerDBName
         - name: APPMANAGER_DBNAME
-          value: "{{ .Values.dbname.aiAppManager }}"
+          valueFrom:
+            configMapKeyRef:
+              name: service-fabric-config
+              key: appDBName
         - name: TEST_PATH_STATUS
           value: 'disable'
         - name: APP_RELEASE

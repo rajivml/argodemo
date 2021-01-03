@@ -20,5 +20,12 @@ data:
   sqlHost: {{ .Values.sql.host }}
   sqlUsername: {{ .Values.sql.username }}
   sqlPassword: {{ .Values.sql.password }}
+  helperDBName: {{ .Values.dbname.aiHelper }}
+  pkgDBName: {{ .Values.dbname.aiPkgManager }}
+  deployerDBName: {{ .Values.dbname.aiDeployer }}
+  trainerDBName: {{ .Values.dbname.aiTrainer }}
+  appDBName: {{ .Values.dbname.aiAppManager }}
+  registryURL: {{ .Values.registry.url }}
   IMAGE_TAG: "{{ .Values.imageTag }}"
+
 
