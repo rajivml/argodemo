@@ -26,6 +26,7 @@ data:
   trainerDBName: {{ .Values.dbname.aiTrainer }}
   appDBName: {{ .Values.dbname.aiAppManager }}
   registryURL: {{ .Values.registry.url }}
+  isAirgap: {{ .Values.isAirgap }}
   IMAGE_TAG: "{{ .Values.imageTag }}"
 
 

@@ -13,9 +13,14 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: sub-charts
+    path: sub-charts-kustomize
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
+    plugin:
+      name: kustomized-helm
+      env:
+        - name: HELM_RELEASE_NAME
+          value: subcharts
 
     # helm specific config
     helm:
