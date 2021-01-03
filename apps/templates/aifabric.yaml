@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aifabric
+  namespace: aifabric
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  destination:
+    namespace: aifabric
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: aifabric
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+
+    # helm specific config
+    helm:
+      # Extra parameters to set (same as setting through values.yaml, but these take precedence)
+      parameters:
+      - name: "ingress.enabled"
+        value: "true"
+        forceString: true # ensures that value is treated as a string
+
+      # # Release name override (defaults to application name)
+      # releaseName: subcharts
+
+      # Helm values files for overriding values in the helm chart
+      # The path is relative to the spec.source.path directory defined above
+      valueFiles:
+      - values.yaml
+
+      #https://github.com/argoproj/argo-cd/issues/1930
+      # valuesLiteral:
+      # - name: values.yaml
+      #   value: |
+      #      param1: value1
+      #      param2: value2
+
+      # # Values file as block file
+      # values: |
+      #   ingress:
+      #     enabled: true
+      #     hosts:
+      #       - mydomain.example.com
+      #     annotations: {}
+      #     labels: {}
+      #       hit-me-hard: "true"
+
+  # Sync policy
+  syncPolicy:
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: false # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: false # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    syncOptions:     # Sync options which modifies sync behavior
+    - Validate=true # disables resource validation (equivalent to 'kubectl apply --validate=false') ( true by default ).
+    - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
+    # The retry feature is available since v1.7
+    retry:
+      limit: {{ .Values.spec.retry.limit }} # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      backoff:
+        duration: {{ .Values.spec.retry.backoff.duration }} # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: {{ .Values.spec.retry.backoff.factor }} # a factor to multiply the base duration after each failed retry
+        maxDuration: {{ .Values.spec.retry.backoff.maxDuration }} # the maximum amount of time allowed for the backoff strategy
+
+  # Ignore differences at the specified json pointers
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/replicas
