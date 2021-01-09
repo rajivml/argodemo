@@ -1,23 +1,23 @@
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   name: preflight-checks-apps
-#   namespace: default
-#   generateName: preflight-checks-apps
-#   annotations:
-#     helm.sh/hook: pre-install
-#     helm.sh/hook-weight: "-3"
-#     helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
-# spec:
-#   backoffLimit: 0
-#   template:
-#     spec:
-#       serviceAccountName: provision
-#       imagePullSecrets:
-#       - name: kotsadm-replicated-registry
-#       containers:
-#       - name: preflights-aif
-#         image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
-#         imagePullPolicy: Always
-#         command: ["bash", "run-checks.sh"]
-#       restartPolicy: Never
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: preflight-checks-apps
+  namespace: default
+  generateName: preflight-checks-apps
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-weight: "-3"
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      serviceAccountName: provision
+      imagePullSecrets:
+      - name: kotsadm-replicated-registry
+      containers:
+      - name: preflights-aif
+        image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
+        imagePullPolicy: Always
+        command: ["bash", "run-checks.sh"]
+      restartPolicy: Never
