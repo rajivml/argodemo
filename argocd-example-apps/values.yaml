@@ -41,7 +41,6 @@ default:
     #  Default fields you want on all applications, unless the app individually overrides
 
 projects:
-
   auth:
     description: 'auth services -- api gateway, auth'
     sourceRepos:
@@ -63,7 +62,6 @@ applications:
     source:
       path: pdf-service
       repoURL: https://MY_APPS_REPOSITORY/onboarding/cd-pdf-service.git
-
     # ignore diffs in replicas since we're doing HPA
     extraFields: |
       ignoreDifferences:
@@ -82,7 +80,6 @@ applications:
       path: mailqueue
       repoURL: https://MY_APPS_REPOSITORY/auth/cd-mailqueue.git
       # apps can override the default extraSourceFields
-      #
       extraSourceFields: |
         helm:
           valueFiles:
