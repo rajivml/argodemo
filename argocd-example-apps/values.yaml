@@ -16,6 +16,7 @@ default:
       - namespace: {{ $.Values.default.app.destination.namespace | required "Missing proj dest namespace"}}
         server: {{ $.Values.default.app.destination.server | required "Missing proj dest server" }}
   app:
+    project: default
     source:
       repoURL: https://github.com/rajivml/argodemo
       targetRevision: HEAD
@@ -39,11 +40,8 @@ deploymentOrder:
 products:
   pdf-service:
     enabled: false
-    syncWave: "3"
     destination:
       namespace: pdfservice
-      server: null
-    project: onboarding
     source:
       path: pdf-service
     extraAnnotations: |
@@ -61,8 +59,6 @@ products:
     enabled: false
     destination:
       namespace: mailqueue
-      server: null
-    project: onboarding
     source:
       path: mailqueue
       # apps can override the default extraSourceFields
@@ -77,11 +73,8 @@ products:
 
   api-gateway:
     enabled: false
-    sync-wave: "3"
     destination:
       namespace: apigateway
-      server: null
-    project: auth
     source:
       path: api-gateway
     extraAnnotations: |
@@ -90,11 +83,8 @@ products:
 
   auth-service:
     enabled: false
-    sync-wave: "4"
     destination:
       namespace: authservice
-      server: null
-    project: auth
     source:
       path: auth-service
     extraAnnotations: |
