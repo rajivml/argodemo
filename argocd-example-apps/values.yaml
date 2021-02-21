@@ -5,6 +5,15 @@ envName: null
 projectOverride: null
 
 
+spec:
+  retry:
+    limit: 2 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+    backoff:
+      duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+      factor: 2 # a factor to multiply the base duration after each failed retry
+      maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
+
+
 default:
   project:
     roles: |
@@ -28,7 +37,7 @@ default:
     project: null
     source:
       path: null
-      repoURL: null
+      repoURL: https://github.com/rajivml/argodemo
       targetRevision: HEAD
 
       extraSourceFields: |
@@ -51,17 +60,28 @@ projects:
     sourceRepos:
     - https://MY_APPS_REPOSITORY/onboarding/*
 
+
+# hyphen (-) not allowed in these keys
+deploymentOrder:
+  pdfservice: "1"
+  mailqueue: "2"
+  apigateway: "3"
+  authservice: "4"
+
 applications:
 
   pdf-service:
     enabled: false
+    syncWave: "3"
     destination:
-      namespace: null
+      namespace: pdfservice
       server: null
     project: onboarding
     source:
       path: pdf-service
-      repoURL: https://MY_APPS_REPOSITORY/onboarding/cd-pdf-service.git
+    extraAnnotations: |
+      annotations:
+        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.pdfservice }}
     # ignore diffs in replicas since we're doing HPA
     extraFields: |
       ignoreDifferences:
@@ -73,35 +93,43 @@ applications:
   mailqueue:
     enabled: false
     destination:
-      namespace: null
+      namespace: mailqueue
       server: null
     project: onboarding
     source:
       path: mailqueue
-      repoURL: https://MY_APPS_REPOSITORY/auth/cd-mailqueue.git
       # apps can override the default extraSourceFields
       extraSourceFields: |
         helm:
           valueFiles:
           - my-app-overrides-{{ $.Values.envName }}-values.yaml
           - {{ $.Values.envName }}-values.yaml
+    extraAnnotations: |
+      annotations:
+        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.mailqueue }}
 
   api-gateway:
     enabled: false
+    sync-wave: "3"
     destination:
-      namespace: null
+      namespace: apigateway
       server: null
     project: auth
     source:
       path: api-gateway
-      repoURL: https://MY_APPS_REPOSITORY/auth/cd-api-gateway.git
+    extraAnnotations: |
+      annotations:
+        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.apigateway }}
 
   auth-service:
     enabled: false
+    sync-wave: "4"
     destination:
-      namespace: null
+      namespace: authservice
       server: null
     project: auth
     source:
       path: auth-service
-      repoURL: https://MY_APPS_REPOSITORY/auth/cd-auth-service.git
+    extraAnnotations: |
+      annotations:
+        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.authservice }}

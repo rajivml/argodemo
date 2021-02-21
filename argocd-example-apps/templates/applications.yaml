@@ -10,9 +10,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ required "A valid envName is required" $.Values.envName }}-{{ $key }}
-  namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "7"
+{{- if $val.extraAnnotations }}
+{{ tpl $val.extraAnnotations $ | indent 2 }}
+{{- end }}
 spec:
   destination:
     namespace: {{ $val.destination.namespace | default $.Values.default.app.destination.namespace | required (printf "No destination.namespace specified for %s" $key ) }}
@@ -32,11 +32,11 @@ spec:
     - Validate=true # disables resource validation (equivalent to 'kubectl apply --validate=false') ( true by default ).
     - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
     retry:
-      limit: {{ .Values.spec.retry.limit }} # number of failed sync attempt retries; unlimited number of attempts if less than 0
+      limit: {{ $.Values.spec.retry.limit }} # number of failed sync attempt retries; unlimited number of attempts if less than 0
       backoff:
-        duration: {{ .Values.spec.retry.backoff.duration }} # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
-        factor: {{ .Values.spec.retry.backoff.factor }} # a factor to multiply the base duration after each failed retry
-        maxDuration: {{ .Values.spec.retry.backoff.maxDuration }} # the maximum amount of time allowed for the backoff strategy
+        duration: {{ $.Values.spec.retry.backoff.duration }} # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: {{ $.Values.spec.retry.backoff.factor }} # a factor to multiply the base duration after each failed retry
+        maxDuration: {{ $.Values.spec.retry.backoff.maxDuration }} # the maximum amount of time allowed for the backoff strategy
 {{- end }}
   source:
     path: {{ tpl $val.source.path $ }}
