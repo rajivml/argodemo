@@ -9,7 +9,7 @@ default:
       targetRevision: test
 
 
-applications:
+products:
   pdf-service:
     enabled: true
     enableAutoSync: true
