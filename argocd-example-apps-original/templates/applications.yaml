@@ -32,11 +32,11 @@ spec:
     - Validate=true # disables resource validation (equivalent to 'kubectl apply --validate=false') ( true by default ).
     - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
     retry:
-      limit: 2
+      limit: {{ $.Values.spec.retry.limit }} # number of failed sync attempt retries; unlimited number of attempts if less than 0
       backoff:
-        duration: 5s
-        factor: 2
-        maxDuration: 3m
+        duration: {{ $.Values.spec.retry.backoff.duration }} # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+        factor: {{ $.Values.spec.retry.backoff.factor }} # a factor to multiply the base duration after each failed retry
+        maxDuration: {{ $.Values.spec.retry.backoff.maxDuration }} # the maximum amount of time allowed for the backoff strategy
 {{- end }}
   source:
     path: {{ tpl $val.source.path $ }}

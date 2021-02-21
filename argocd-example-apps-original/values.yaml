@@ -1,6 +1,19 @@
 # your override should supply an envName
 envName: null
 
+# if set, override all Applications to use this project
+projectOverride: null
+
+
+spec:
+  retry:
+    limit: 2 # number of failed sync attempt retries; unlimited number of attempts if less than 0
+    backoff:
+      duration: 5s # the amount to back off. Default unit is seconds, but could also be a duration (e.g. "2m", "1h")
+      factor: 2 # a factor to multiply the base duration after each failed retry
+      maxDuration: 3m # the maximum amount of time allowed for the backoff strategy
+
+
 default:
   project:
     roles: |
@@ -16,9 +29,17 @@ default:
       - namespace: {{ $.Values.default.app.destination.namespace | required "Missing proj dest namespace"}}
         server: {{ $.Values.default.app.destination.server | required "Missing proj dest server" }}
   app:
+    enableAutoSync: null
+    autoSyncPrune: true
+    destination:
+      namespace: null
+      server: null
+    project: null
     source:
+      path: null
       repoURL: https://github.com/rajivml/argodemo
       targetRevision: HEAD
+
       extraSourceFields: |
         helm:
           valueFiles:
@@ -27,6 +48,17 @@ default:
       #    namePrefix: prod-
     #extraFields: |
     #  Default fields you want on all applications, unless the app individually overrides
+
+projects:
+  auth:
+    description: 'auth services -- api gateway, auth'
+    sourceRepos:
+    - https://MY_APPS_REPOSITORY/auth/*
+
+  onboarding:
+    description: 'onboarding services -- user PII, etc'
+    sourceRepos:
+    - https://MY_APPS_REPOSITORY/onboarding/*
 
 
 # hyphen (-) not allowed in these keys
@@ -37,6 +69,7 @@ deploymentOrder:
   authservice: "4"
 
 applications:
+
   pdf-service:
     enabled: false
     syncWave: "3"
