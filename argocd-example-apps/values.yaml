@@ -19,7 +19,7 @@ default:
     project: default
     source:
       repoURL: https://github.com/rajivml/argodemo
-      targetRevision: HEAD
+      targetRevision: main
       extraSourceFields: |
         helm:
           valueFiles:
@@ -46,9 +46,9 @@ products:
     deploymentOrder: "1"
     enableAutoSync: true
     destination:
-      namespace: pdfservice
+      namespace: helm-guestbook
     source:
-      path: pdf-service
+      path: helm-guestbook
     extraAnnotations: |
       annotations:
         argocd.argoproj.io/sync-wave: {{ $.Values.products.pdfservice.deploymentOrder }}
@@ -64,9 +64,9 @@ products:
     deploymentOrder: "2"
     enableAutoSync: true
     destination:
-      namespace: mailqueue
+      namespace: spring-petclinic
     source:
-      path: mailqueue
+      path: spring-petclinic
       # apps can override the default extraSourceFields
       extraSourceFields: |
         helm:
@@ -81,9 +81,9 @@ products:
     deploymentOrder: "3"
     enableAutoSync: true
     destination:
-      namespace: apigateway
+      namespace: sub-charts
     source:
-      path: api-gateway
+      path: sub-charts
     extraAnnotations: |
       annotations:
         argocd.argoproj.io/sync-wave: {{ $.Values.products.apigateway.deploymentOrder }}
@@ -92,9 +92,9 @@ products:
     deploymentOrder: "4"
     enableAutoSync: true
     destination:
-      namespace: authservice
+      namespace: apachewebserver
     source:
-      path: auth-service
+      path: apachewebserver
     extraAnnotations: |
       annotations:
         argocd.argoproj.io/sync-wave: {{ $.Values.products.authservice.deploymentOrder }}
