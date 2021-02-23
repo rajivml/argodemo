@@ -51,7 +51,7 @@ products:
       path: helm-guestbook
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.pdfservice.deploymentOrder }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.pdfservice.deploymentOrder | quote }}
     # ignore diffs in replicas since we're doing HPA
     extraFields: |
       ignoreDifferences:
@@ -75,7 +75,7 @@ products:
           - {{ $.Values.envName }}-values.yaml
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.mailqueue.deploymentOrder }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.mailqueue.deploymentOrder | quote }}
 
   apigateway:
     deploymentOrder: "3"
@@ -86,7 +86,7 @@ products:
       path: sub-charts
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.apigateway.deploymentOrder }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.apigateway.deploymentOrder | quote }}
 
   authservice:
     deploymentOrder: "4"
@@ -97,4 +97,4 @@ products:
       path: apachewebserver
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.authservice.deploymentOrder }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.authservice.deploymentOrder | quote }}
