@@ -9,19 +9,13 @@ default:
       targetRevision: test
 
 
-products:
-  pdf-service:
+applications:
+  pdfservice:
     enabled: true
-    enableAutoSync: true
-
   mailqueue:
     enabled: true
-    enableAutoSync: true
+  apigateway:
+    enabled: false
+  authservice:
+    enabled: false
 
-  api-gateway:
-    enabled: true
-    enableAutoSync: true
-
-  auth-service:
-    enabled: true
-    enableAutoSync: true

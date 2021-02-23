@@ -1,10 +1,12 @@
+{{- $root := . -}}
 {{- range $key,$val := .Values.products }}
 {{- /*
 in order to use tpl within a range, _and_ have the key/val available to sub-templates,
 need to add some variables to the root context.
 */ -}}
 {{- $_ := set $ "curAppName" (print $.Values.envName "-" $key) }}
-{{- if $val.enabled }}
+
+{{- if (get $root.Values.applications $key).enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -25,12 +27,12 @@ spec:
 {{- if $val.enableAutoSync | default $.Values.default.app.enableAutoSync }}
   syncPolicy:
     automated:
-      prune: {{ $val.autoSyncPrune | default $.Values.default.app.autoSyncPrune | default true }} # Specifies if resources should be pruned during auto-syncing ( false by default ).
-      selfHeal: false # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
-      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
-    syncOptions:     # Sync options which modifies sync behavior
-    - Validate=true # disables resource validation (equivalent to 'kubectl apply --validate=false') ( true by default ).
-    - CreateNamespace=true # Namespace Auto-Creation ensures that namespace specified as the application destination exists in the destination cluster.
+      prune: {{ $val.autoSyncPrune | default $.Values.default.app.autoSyncPrune | default true }}
+      selfHeal: false
+      allowEmpty: false
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
     retry:
       limit: 2
       backoff:

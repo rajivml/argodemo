@@ -30,23 +30,28 @@ default:
     #  Default fields you want on all applications, unless the app individually overrides
 
 
-# hyphen (-) not allowed in these keys
-deploymentOrder:
-  pdfservice: "1"
-  mailqueue: "2"
-  apigateway: "3"
-  authservice: "4"
+applications:
+  pdfservice:
+    enabled: false
+  mailqueue:
+    enabled: false
+  apigateway:
+    enabled: false
+  authservice:
+    enabled: false
+
 
 products:
-  pdf-service:
-    enabled: false
+  pdfservice:
+    deploymentOrder: "1"
+    enableAutoSync: true
     destination:
       namespace: pdfservice
     source:
       path: pdf-service
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.pdfservice }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.pdfservice.deploymentOrder }}
     # ignore diffs in replicas since we're doing HPA
     extraFields: |
       ignoreDifferences:
@@ -56,7 +61,8 @@ products:
         - /spec/replicas
 
   mailqueue:
-    enabled: false
+    deploymentOrder: "2"
+    enableAutoSync: true
     destination:
       namespace: mailqueue
     source:
@@ -69,24 +75,26 @@ products:
           - {{ $.Values.envName }}-values.yaml
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.mailqueue }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.mailqueue.deploymentOrder }}
 
-  api-gateway:
-    enabled: false
+  apigateway:
+    deploymentOrder: "3"
+    enableAutoSync: true
     destination:
       namespace: apigateway
     source:
       path: api-gateway
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.apigateway }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.apigateway.deploymentOrder }}
 
-  auth-service:
-    enabled: false
+  authservice:
+    deploymentOrder: "4"
+    enableAutoSync: true
     destination:
       namespace: authservice
     source:
       path: auth-service
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.deploymentOrder.authservice }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.authservice.deploymentOrder }}
