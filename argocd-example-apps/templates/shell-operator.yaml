@@ -1,7 +1,16 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: secret-copier
+  annotations:
+    argocd.argoproj.io/sync-wave: "-101"
+
+---
+apiVersion: v1
 kind: ServiceAccount
 metadata:
+  namespace: secret-copier
   name: secret-copier-acc
   annotations:
     argocd.argoproj.io/sync-wave: "-100"
@@ -10,21 +19,23 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
+  namespace: secret-copier
   name: secret-copier
   annotations:
     argocd.argoproj.io/sync-wave: "-100"
 rules:
-- apiGroups: ["*"]
+- apiGroups: [""]
   resources: ["namespaces"]
   verbs: ["get", "watch", "list"]
-- apiGroups: ["*"]
-  resources: ["secrets", "configmaps"]
+- apiGroups: [""]
+  resources: ["secrets"]
   verbs: ["*"]
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  namespace: secret-copier
   name: secret-copier
   annotations:
     argocd.argoproj.io/sync-wave: "-100"
@@ -42,6 +53,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: shell-operator
+  namespace: secret-copier
   annotations:
     argocd.argoproj.io/sync-wave: "-100"
 spec:
