@@ -23,7 +23,7 @@ default:
       extraSourceFields: |
         helm:
           valueFiles:
-          - {{ $.Values.envName }}-values.yaml
+          - values.yaml
       #  kustomize:
       #    namePrefix: prod-
     #extraFields: |
@@ -68,11 +68,6 @@ products:
     source:
       path: spring-petclinic
       # apps can override the default extraSourceFields
-      extraSourceFields: |
-        helm:
-          valueFiles:
-          - my-app-overrides-{{ $.Values.envName }}-values.yaml
-          - {{ $.Values.envName }}-values.yaml
     extraAnnotations: |
       annotations:
         argocd.argoproj.io/sync-wave: {{ $.Values.products.mailqueue.deploymentOrder | quote }}
