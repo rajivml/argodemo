@@ -14,10 +14,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-100"
 rules:
-- apiGroups: [""]
+- apiGroups: ["*"]
   resources: ["namespaces"]
   verbs: ["get", "watch", "list"]
-- apiGroups: [""]
+- apiGroups: ["*"]
   resources: ["secrets", "configmaps"]
   verbs: ["*"]
 
