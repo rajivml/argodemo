@@ -6,6 +6,6 @@ metadata:
 spec:
   containers:
   - name: shell-operator
-    image: uipath/secret-copier:0.1
+    image: registry.mycompany.com/shell-operator:secret-copier
     imagePullPolicy: Always
   serviceAccountName: secret-copier-acc
