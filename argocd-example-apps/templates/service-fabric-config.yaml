@@ -1,0 +1,30 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: service-fabric-config
+  namespace: default
+  labels:
+    environment: production
+    app: servicefabric
+    secret-copier: "yes"
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+data:
+  # Configuration values can be set as key-value properties
+  database: mongodb
+  database_uri: mongodb://localhost:27017
+  ingressHost: {{ .Values.ingress.host }}
+  orchestratorEndpoint: {{ .Values.orchestrator.endpoint }}
+  identityserverEndpoint: {{ .Values.identityserver.endpoint }}
+  accessToken: {{ .Values.identity.accessToken }}
+  sqlHost: {{ .Values.sql.host }}
+  sqlUsername: {{ .Values.sql.username }}
+  sqlPassword: {{ .Values.sql.password }}
+  helperDBName: {{ .Values.dbname.aiHelper }}
+  pkgDBName: {{ .Values.dbname.aiPkgManager }}
+  deployerDBName: {{ .Values.dbname.aiDeployer }}
+  trainerDBName: {{ .Values.dbname.aiTrainer }}
+  appDBName: {{ .Values.dbname.aiAppManager }}
+  registryURL: {{ .Values.registry.url }}
+  isAirgap: {{ .Values.isAirgap }}
+  IMAGE_TAG: "{{ .Values.imageTag }}"
