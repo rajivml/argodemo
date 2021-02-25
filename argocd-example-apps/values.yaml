@@ -119,4 +119,4 @@ registry:
 
 imageTag: "2.0"
 
-isAirgap: false
+isAirgap: "false"
