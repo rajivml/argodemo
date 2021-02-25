@@ -12,6 +12,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ required "A valid envName is required" $.Values.envName }}-{{ $key }}
+  namespace: argocd
 {{- if $val.extraAnnotations }}
 {{ tpl $val.extraAnnotations $ | indent 2 }}
 {{- end }}
