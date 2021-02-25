@@ -23,7 +23,7 @@ spec:
 {{- if $val.enableAutoSync | default $.Values.default.app.enableAutoSync }}
   syncPolicy:
     automated:
-      prune: {{ $val.autoSyncPrune | default $.Values.default.app.autoSyncPrune | default true }}
+      prune: false
       selfHeal: false
       allowEmpty: false
     syncOptions:
