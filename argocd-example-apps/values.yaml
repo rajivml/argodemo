@@ -93,3 +93,30 @@ products:
     extraAnnotations: |
       annotations:
         argocd.argoproj.io/sync-wave: {{ $.Values.products.authservice.deploymentOrder | quote }}
+
+
+#EndUser specific
+ingress:
+  host: IP_ADDRESS_OF_KUBERNETES_INSTANCE
+orchestrator:
+  endpoint: ORCHESTRATOR_IP:ORCHESTRATOR_PORT
+identityserver:
+  endpoint: IDENTITY_SERVER_IP:IDENTITY_SERVER_PORT
+identity:
+  accessToken: abcde
+sql:
+  host: DATABASE_IP
+  username: admin
+  password: password
+dbname:
+  aiHelper: ai_helper
+  aiDeployer: ai_deployer
+  aiPkgManager: ai_pkgmanager
+  aiTrainer: ai_trainer
+  aiAppManager: ai_appmanager
+registry:
+  url: 127.0.0.1
+
+imageTag: "2.0"
+
+isAirgap: false
