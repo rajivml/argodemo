@@ -17,6 +17,7 @@ pvc:
   accessmodes: ReadWriteOnce
   request: 1Gi
   claimname: myhttpdclaim
+  storageClassName: longhorn
 
 ingress:
   enabled: false

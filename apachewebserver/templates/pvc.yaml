@@ -9,6 +9,7 @@ spec:
   #storageClassName: "test-sc"
   accessModes:
     - {{ .Values.pvc.accessmodes }}
+  storageClassName: {{ .Values.pvc.storageClassName }}
   resources:
     requests:
       storage: {{ .Values.pvc.request }}
