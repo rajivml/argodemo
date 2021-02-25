@@ -19,11 +19,7 @@ spec:
   destination:
     namespace: {{ $val.destination.namespace | default $.Values.default.app.destination.namespace | required (printf "No destination.namespace specified for %s" $key ) }}
     server: {{ $val.destination.server | default $.Values.default.app.destination.server | required (printf "No destination.server specified for %s" $key ) }}
-{{- if $.Values.projectOverride }}
-  project: {{ $.Values.projectOverride }}
-{{- else }}
-  project: {{ $.Values.envName }}-{{ $val.project | default $.Values.default.app.project | required (printf "No project specified for %s" $key ) }}
-{{- end }}
+  project: default
 {{- if $val.enableAutoSync | default $.Values.default.app.enableAutoSync }}
   syncPolicy:
     automated:
