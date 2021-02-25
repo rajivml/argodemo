@@ -48,6 +48,11 @@ subjects:
     name: secret-copier-acc
     namespace: secret-copier
 
+# kubectl create -n secret-copier serviceaccount post-provision
+# kubectl create -n secret-copier clusterrolebinding post-provision-admin \
+#     --clusterrole=cluster-admin \
+#     --serviceaccount=secret-copier:post-provision
+
 ---
 apiVersion: v1
 kind: Pod
@@ -61,5 +66,5 @@ spec:
   - name: shell-operator
     image: uipath/secret-copier:0.1
     imagePullPolicy: Always
-  serviceAccountName: secret-copier-acc
+  serviceAccountName: post-provision
 
