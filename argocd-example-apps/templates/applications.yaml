@@ -24,7 +24,10 @@ spec:
 {{- if $val.enableAutoSync | default $.Values.default.app.enableAutoSync }}
   syncPolicy:
     automated:
-      prune: false
+      #https://argoproj.github.io/argo-cd/user-guide/sync-options/
+      #https://argoproj.github.io/argo-cd/user-guide/compare-options/
+      prune: true
+      #https://argoproj.github.io/argo-cd/user-guide/auto_sync/
       selfHeal: false
       allowEmpty: false
     syncOptions:
