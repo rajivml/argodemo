@@ -23,7 +23,7 @@ metadata:
   namespace: secret-copier
   name: post-provision
   annotations:
-    argocd.argoproj.io/sync-wave: "-100"
+    argocd.argoproj.io/sync-wave: "-101"
 
 # ---
 # apiVersion: rbac.authorization.k8s.io/v1beta1
@@ -70,6 +70,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: post-provision-admin
+  annotations:
+    argocd.argoproj.io/sync-wave: "-101"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
