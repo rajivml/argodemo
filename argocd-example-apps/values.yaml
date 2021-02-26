@@ -65,53 +65,55 @@ applications:
     imageTag: "2.0"
     isAirgap: "false"
 
-products:
-  guestbook:
-    deploymentOrder: "1"
-    destination:
-      namespace: helm-guestbook
-    source:
-      path: helm-guestbook
-    extraAnnotations: |
-      annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.guestbook.deploymentOrder | quote }}
-    # ignore diffs in replicas since we're doing HPA
-    extraFields: |
-      ignoreDifferences:
-      - group: apps
-        kind: Deployment
-        jsonPointers:
-        - /spec/replicas
+doNotTouch:
 
-  petclinic:
-    deploymentOrder: "2"
-    destination:
-      namespace: spring-petclinic
-    source:
-      path: spring-petclinic
-      # apps can override the default extraSourceFields
-    extraAnnotations: |
-      annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.petclinic.deploymentOrder | quote }}
+  products:
+    guestbook:
+      deploymentOrder: "1"
+      destination:
+        namespace: helm-guestbook
+      source:
+        path: helm-guestbook
+      extraAnnotations: |
+        annotations:
+          argocd.argoproj.io/sync-wave: {{ $.Values.products.guestbook.deploymentOrder | quote }}
+      # ignore diffs in replicas since we're doing HPA
+      extraFields: |
+        ignoreDifferences:
+        - group: apps
+          kind: Deployment
+          jsonPointers:
+          - /spec/replicas
 
-  subcharts:
-    deploymentOrder: "3"
-    destination:
-      namespace: sub-charts
-    source:
-      path: sub-charts
-    extraAnnotations: |
-      annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.subcharts.deploymentOrder | quote }}
+    petclinic:
+      deploymentOrder: "2"
+      destination:
+        namespace: spring-petclinic
+      source:
+        path: spring-petclinic
+        # apps can override the default extraSourceFields
+      extraAnnotations: |
+        annotations:
+          argocd.argoproj.io/sync-wave: {{ $.Values.products.petclinic.deploymentOrder | quote }}
 
-  apachewebserver:
-    deploymentOrder: "4"
-    destination:
-      namespace: apachewebserver
-    source:
-      path: apachewebserver
-    extraAnnotations: |
-      annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.apachewebserver.deploymentOrder | quote }}
+    subcharts:
+      deploymentOrder: "3"
+      destination:
+        namespace: sub-charts
+      source:
+        path: sub-charts
+      extraAnnotations: |
+        annotations:
+          argocd.argoproj.io/sync-wave: {{ $.Values.products.subcharts.deploymentOrder | quote }}
+
+    apachewebserver:
+      deploymentOrder: "4"
+      destination:
+        namespace: apachewebserver
+      source:
+        path: apachewebserver
+      extraAnnotations: |
+        annotations:
+          argocd.argoproj.io/sync-wave: {{ $.Values.products.apachewebserver.deploymentOrder | quote }}
 
 

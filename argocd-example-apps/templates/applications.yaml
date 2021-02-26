@@ -1,5 +1,5 @@
 {{- $root := . -}}
-{{- range $key,$val := .Values.products }}
+{{- range $key,$val := .Values.doNotTouch.products }}
 {{- /*
 in order to use tpl within a range, _and_ have the key/val available to sub-templates,
 need to add some variables to the root context.
