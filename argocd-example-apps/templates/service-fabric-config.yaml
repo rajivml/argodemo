@@ -13,18 +13,18 @@ data:
   # Configuration values can be set as key-value properties
   database: mongodb
   database_uri: mongodb://localhost:27017
-  ingressHost: {{ .Values.userInputs.ingress.host }}
-  orchestratorEndpoint: {{ .Values.userInputs.orchestrator.endpoint }}
-  identityserverEndpoint: {{ .Values.userInputs.identityserver.endpoint }}
-  accessToken: {{ .Values.userInputs.identity.accessToken }}
-  sqlHost: {{ .Values.userInputs.sql.host }}
-  sqlUsername: {{ .Values.userInputs.sql.username }}
-  sqlPassword: {{ .Values.userInputs.sql.password }}
-  helperDBName: {{ .Values.userInputs.dbname.aiHelper }}
-  pkgDBName: {{ .Values.userInputs.dbname.aiPkgManager }}
-  deployerDBName: {{ .Values.userInputs.dbname.aiDeployer }}
-  trainerDBName: {{ .Values.userInputs.dbname.aiTrainer }}
-  appDBName: {{ .Values.userInputs.dbname.aiAppManager }}
-  registryURL: {{ .Values.userInputs.registry.url }}
-  isAirgap: "{{ .Values.userInputs.isAirgap }}"
-  IMAGE_TAG: "{{ .Values.userInputs.imageTag }}"
+  ingressHost: {{ .Values.applications.userInputs.ingress.host }}
+  orchestratorEndpoint: {{ .Values.applications.userInputs.orchestrator.endpoint }}
+  identityserverEndpoint: {{ .Values.applications.userInputs.identityserver.endpoint }}
+  accessToken: {{ .Values.applications.userInputs.identity.accessToken }}
+  sqlHost: {{ .Values.applications.userInputs.sql.host }}
+  sqlUsername: {{ .Values.applications.userInputs.sql.username }}
+  sqlPassword: {{ .Values.applications.userInputs.sql.password }}
+  helperDBName: {{ .Values.applications.userInputs.dbname.aiHelper }}
+  pkgDBName: {{ .Values.applications.userInputs.dbname.aiPkgManager }}
+  deployerDBName: {{ .Values.applications.userInputs.dbname.aiDeployer }}
+  trainerDBName: {{ .Values.applications.userInputs.dbname.aiTrainer }}
+  appDBName: {{ .Values.applications.userInputs.dbname.aiAppManager }}
+  registryURL: {{ .Values.applications.userInputs.registry.url }}
+  isAirgap: "{{ .Values.applications.userInputs.isAirgap }}"
+  IMAGE_TAG: "{{ .Values.applications.userInputs.imageTag }}"
