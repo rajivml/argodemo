@@ -10,7 +10,7 @@ service:
   type: NodePort
   port: 8080
   targetport: 8080
-  nodeport: 31228
+  nodeport: 31229
   servicename: httpd-service
 
 pvc:
