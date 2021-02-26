@@ -15,7 +15,7 @@ applications:
   petclinic:
     enabled: true
   subcharts:
-    enabled: false
+    enabled: true
   apachewebserver:
-    enabled: false
+    enabled: true
 

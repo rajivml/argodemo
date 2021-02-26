@@ -33,7 +33,7 @@ default:
 applications:
   guestbook:
     enabled: false
-  mailqueue:
+  petclinic:
     enabled: false
   subcharts:
     enabled: false
