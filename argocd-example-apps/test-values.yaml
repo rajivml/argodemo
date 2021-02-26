@@ -1,12 +1,13 @@
 envName: test
 
-default:
-  app:
-    destination:
-      namespace: test
-      server: https://kubernetes.default.svc
-    source:
-      targetRevision: main
+doNotTouch:
+  default:
+    app:
+      destination:
+        namespace: test
+        server: https://kubernetes.default.svc
+      source:
+        targetRevision: main
 
 
 applications:
