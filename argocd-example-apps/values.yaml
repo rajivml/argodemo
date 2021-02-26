@@ -76,7 +76,7 @@ doNotTouch:
         path: helm-guestbook
       extraAnnotations: |
         annotations:
-          argocd.argoproj.io/sync-wave: {{ $.Values.products.guestbook.deploymentOrder | quote }}
+          argocd.argoproj.io/sync-wave: {{ $.Values.doNotTouch.products.guestbook.deploymentOrder | quote }}
       # ignore diffs in replicas since we're doing HPA
       extraFields: |
         ignoreDifferences:
@@ -94,7 +94,7 @@ doNotTouch:
         # apps can override the default extraSourceFields
       extraAnnotations: |
         annotations:
-          argocd.argoproj.io/sync-wave: {{ $.Values.products.petclinic.deploymentOrder | quote }}
+          argocd.argoproj.io/sync-wave: {{ $.Values.doNotTouch.products.petclinic.deploymentOrder | quote }}
 
     subcharts:
       deploymentOrder: "3"
@@ -104,7 +104,7 @@ doNotTouch:
         path: sub-charts
       extraAnnotations: |
         annotations:
-          argocd.argoproj.io/sync-wave: {{ $.Values.products.subcharts.deploymentOrder | quote }}
+          argocd.argoproj.io/sync-wave: {{ $.Values.doNotTouch.products.subcharts.deploymentOrder | quote }}
 
     apachewebserver:
       deploymentOrder: "4"
@@ -114,6 +114,6 @@ doNotTouch:
         path: apachewebserver
       extraAnnotations: |
         annotations:
-          argocd.argoproj.io/sync-wave: {{ $.Values.products.apachewebserver.deploymentOrder | quote }}
+          argocd.argoproj.io/sync-wave: {{ $.Values.doNotTouch.products.apachewebserver.deploymentOrder | quote }}
 
 
