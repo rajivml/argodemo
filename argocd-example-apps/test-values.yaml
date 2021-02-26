@@ -10,12 +10,13 @@ default:
 
 
 applications:
-  guestbook:
-    enabled: true
-  petclinic:
-    enabled: true
-  subcharts:
-    enabled: true
-  apachewebserver:
-    enabled: true
+  apps:
+    guestbook:
+      enabled: true
+    petclinic:
+      enabled: true
+    subcharts:
+      enabled: true
+    apachewebserver:
+      enabled: true
 

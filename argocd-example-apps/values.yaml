@@ -17,6 +17,7 @@ default:
         server: {{ $.Values.default.app.destination.server | required "Missing proj dest server" }}
   app:
     project: default
+    enableAutoSync: true
     source:
       repoURL: https://github.com/rajivml/argodemo
       targetRevision: main
@@ -31,20 +32,42 @@ default:
 
 
 applications:
-  guestbook:
-    enabled: false
-  petclinic:
-    enabled: false
-  subcharts:
-    enabled: false
-  apachewebserver:
-    enabled: false
-
+  apps:
+    guestbook:
+      enabled: false
+    petclinic:
+      enabled: false
+    subcharts:
+      enabled: false
+    apachewebserver:
+      enabled: false
+  userInputs:
+    ingress:
+      host: IP_ADDRESS_OF_KUBERNETES_INSTANCE
+    orchestrator:
+      endpoint: ORCHESTRATOR_IP:ORCHESTRATOR_PORT
+    identityserver:
+      endpoint: IDENTITY_SERVER_IP:IDENTITY_SERVER_PORT
+    identity:
+      accessToken: abcde
+    sql:
+      host: DATABASE_IP
+      username: admin
+      password: password
+    dbname:
+      aiHelper: ai_helper
+      aiDeployer: ai_deployer
+      aiPkgManager: ai_pkgmanager
+      aiTrainer: ai_trainer
+      aiAppManager: ai_appmanager
+    registry:
+      url: 127.0.0.1
+    imageTag: "2.0"
+    isAirgap: "false"
 
 products:
   guestbook:
     deploymentOrder: "1"
-    enableAutoSync: true
     destination:
       namespace: helm-guestbook
     source:
@@ -62,7 +85,6 @@ products:
 
   petclinic:
     deploymentOrder: "2"
-    enableAutoSync: true
     destination:
       namespace: spring-petclinic
     source:
@@ -74,7 +96,6 @@ products:
 
   subcharts:
     deploymentOrder: "3"
-    enableAutoSync: true
     destination:
       namespace: sub-charts
     source:
@@ -85,7 +106,6 @@ products:
 
   apachewebserver:
     deploymentOrder: "4"
-    enableAutoSync: true
     destination:
       namespace: apachewebserver
     source:
@@ -95,28 +115,3 @@ products:
         argocd.argoproj.io/sync-wave: {{ $.Values.products.apachewebserver.deploymentOrder | quote }}
 
 
-#EndUser specific
-ingress:
-  host: IP_ADDRESS_OF_KUBERNETES_INSTANCE
-orchestrator:
-  endpoint: ORCHESTRATOR_IP:ORCHESTRATOR_PORT
-identityserver:
-  endpoint: IDENTITY_SERVER_IP:IDENTITY_SERVER_PORT
-identity:
-  accessToken: abcde
-sql:
-  host: DATABASE_IP
-  username: admin
-  password: password
-dbname:
-  aiHelper: ai_helper
-  aiDeployer: ai_deployer
-  aiPkgManager: ai_pkgmanager
-  aiTrainer: ai_trainer
-  aiAppManager: ai_appmanager
-registry:
-  url: 127.0.0.1
-
-imageTag: "2.0"
-
-isAirgap: "false"

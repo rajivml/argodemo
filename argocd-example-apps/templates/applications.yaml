@@ -6,7 +6,7 @@ need to add some variables to the root context.
 */ -}}
 {{- $_ := set $ "curAppName" (print $.Values.envName "-" $key) }}
 
-{{- if (get $root.Values.applications $key).enabled }}
+{{- if (get $root.Values.applications.apps $key).enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

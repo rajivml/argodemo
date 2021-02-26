@@ -13,18 +13,18 @@ data:
   # Configuration values can be set as key-value properties
   database: mongodb
   database_uri: mongodb://localhost:27017
-  ingressHost: {{ .Values.ingress.host }}
-  orchestratorEndpoint: {{ .Values.orchestrator.endpoint }}
-  identityserverEndpoint: {{ .Values.identityserver.endpoint }}
-  accessToken: {{ .Values.identity.accessToken }}
-  sqlHost: {{ .Values.sql.host }}
-  sqlUsername: {{ .Values.sql.username }}
-  sqlPassword: {{ .Values.sql.password }}
-  helperDBName: {{ .Values.dbname.aiHelper }}
-  pkgDBName: {{ .Values.dbname.aiPkgManager }}
-  deployerDBName: {{ .Values.dbname.aiDeployer }}
-  trainerDBName: {{ .Values.dbname.aiTrainer }}
-  appDBName: {{ .Values.dbname.aiAppManager }}
-  registryURL: {{ .Values.registry.url }}
-  isAirgap: "{{ .Values.isAirgap }}"
-  IMAGE_TAG: "{{ .Values.imageTag }}"
+  ingressHost: {{ .Values.userInputs.ingress.host }}
+  orchestratorEndpoint: {{ .Values.userInputs.orchestrator.endpoint }}
+  identityserverEndpoint: {{ .Values.userInputs.identityserver.endpoint }}
+  accessToken: {{ .Values.userInputs.identity.accessToken }}
+  sqlHost: {{ .Values.userInputs.sql.host }}
+  sqlUsername: {{ .Values.userInputs.sql.username }}
+  sqlPassword: {{ .Values.userInputs.sql.password }}
+  helperDBName: {{ .Values.userInputs.dbname.aiHelper }}
+  pkgDBName: {{ .Values.userInputs.dbname.aiPkgManager }}
+  deployerDBName: {{ .Values.userInputs.dbname.aiDeployer }}
+  trainerDBName: {{ .Values.userInputs.dbname.aiTrainer }}
+  appDBName: {{ .Values.userInputs.dbname.aiAppManager }}
+  registryURL: {{ .Values.userInputs.registry.url }}
+  isAirgap: "{{ .Values.userInputs.isAirgap }}"
+  IMAGE_TAG: "{{ .Values.userInputs.imageTag }}"
