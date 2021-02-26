@@ -31,18 +31,18 @@ default:
 
 
 applications:
-  pdfservice:
+  guestbook:
     enabled: false
   mailqueue:
     enabled: false
-  apigateway:
+  subcharts:
     enabled: false
-  authservice:
+  apachewebserver:
     enabled: false
 
 
 products:
-  pdfservice:
+  guestbook:
     deploymentOrder: "1"
     enableAutoSync: true
     destination:
@@ -51,7 +51,7 @@ products:
       path: helm-guestbook
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.pdfservice.deploymentOrder | quote }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.guestbook.deploymentOrder | quote }}
     # ignore diffs in replicas since we're doing HPA
     extraFields: |
       ignoreDifferences:
@@ -60,7 +60,7 @@ products:
         jsonPointers:
         - /spec/replicas
 
-  mailqueue:
+  petclinic:
     deploymentOrder: "2"
     enableAutoSync: true
     destination:
@@ -70,9 +70,9 @@ products:
       # apps can override the default extraSourceFields
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.mailqueue.deploymentOrder | quote }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.petclinic.deploymentOrder | quote }}
 
-  apigateway:
+  subcharts:
     deploymentOrder: "3"
     enableAutoSync: true
     destination:
@@ -81,9 +81,9 @@ products:
       path: sub-charts
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.apigateway.deploymentOrder | quote }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.subcharts.deploymentOrder | quote }}
 
-  authservice:
+  apachewebserver:
     deploymentOrder: "4"
     enableAutoSync: true
     destination:
@@ -92,7 +92,7 @@ products:
       path: apachewebserver
     extraAnnotations: |
       annotations:
-        argocd.argoproj.io/sync-wave: {{ $.Values.products.authservice.deploymentOrder | quote }}
+        argocd.argoproj.io/sync-wave: {{ $.Values.products.apachewebserver.deploymentOrder | quote }}
 
 
 #EndUser specific

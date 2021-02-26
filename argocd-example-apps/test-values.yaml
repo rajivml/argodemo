@@ -10,12 +10,12 @@ default:
 
 
 applications:
-  pdfservice:
+  guestbook:
     enabled: true
-  mailqueue:
+  petclinic:
     enabled: true
-  apigateway:
+  subcharts:
     enabled: false
-  authservice:
+  apachewebserver:
     enabled: false
 
