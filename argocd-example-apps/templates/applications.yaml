@@ -24,7 +24,7 @@ spec:
 {{- if $val.enableAutoSync | default $.Values.default.app.enableAutoSync }}
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: false
       allowEmpty: false
     syncOptions:
