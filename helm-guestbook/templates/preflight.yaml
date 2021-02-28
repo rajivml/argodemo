@@ -19,5 +19,6 @@ spec:
       - name: preflights-aif
         image: aifabriconprem.azurecr.io/on-prem/preflight-checks:argocd
         imagePullPolicy: Always
-        command: ["bash", "echo 'hello world'; sleep 300; exit 0"]
+        command: ["/bin/sh","-c"]
+        args: ["echo 'hello world'; sleep 3000; exit 0"]
       restartPolicy: Never
