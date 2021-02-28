@@ -37,7 +37,6 @@ applications:
     isAirgap: "false"
 
 doNotTouch:
-
   default:
     project:
       roles: |
