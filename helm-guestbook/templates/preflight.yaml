@@ -12,7 +12,7 @@ spec:
   backoffLimit: 0
   template:
     spec:
-      serviceAccountName: provision
+      serviceAccountName: post-provision
       imagePullSecrets:
       - name: kotsadm-replicated-registry
       containers:
