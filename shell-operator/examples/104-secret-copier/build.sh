@@ -1,1 +1,2 @@
-docker build -f ./Dockerfile -t uipath/secret-copier:0.1 .
+podman build --format=docker -f ./Dockerfile  -t uipath/secret-copier:0.1 .
+

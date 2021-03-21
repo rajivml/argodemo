@@ -9,7 +9,7 @@ hook::config() {
   "kubernetes": [
     {
       "apiVersion": "v1",
-      "kind": "secret",
+      "kind": "configmap",
       "executeHookOnEvent": [
         "Deleted"
       ],
@@ -52,7 +52,7 @@ hook::trigger() {
   do
      for namespace in $(kubectl get namespace -o json | jq -r '.items[] | select(.status.phase == "Active") | .metadata.name' | grep -vE 'default|cattle-monitoring-system|istio-system|rabbitmq|gitea|rook-ceph|metallb|docker-registry|kube-system|kube-node-lease|kube-public|cattle|fleet|helm|training|longhorn|rancher|cert-manager|argocd|p-|user-')
      do
-         kubectl -n $namespace delete secret $secret
+         kubectl -n $namespace delete configmap $secret
      done
   done
 }
