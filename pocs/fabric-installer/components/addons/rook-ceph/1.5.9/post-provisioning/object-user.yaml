@@ -1,0 +1,8 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: service-fabric
+  namespace: rook-ceph
+spec:
+  store: rook-ceph-store
+  displayName: "service-fabric"

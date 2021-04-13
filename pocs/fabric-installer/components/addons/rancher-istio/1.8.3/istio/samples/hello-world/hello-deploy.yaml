@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helloworld
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: helloworld
+    spec:
+      containers:
+      - image: istio/examples-helloworld-v1
+        imagePullPolicy: IfNotPresent
+        name: helloworld
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m

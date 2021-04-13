@@ -1,0 +1,16 @@
+FROM uipath/sf-k8-utils-rhel:0.1
+
+# copy provisioining content
+# Path is relative to the location from where shell script is being triggered 
+COPY ../../pocs/fabric-installer /service-fabric-packaging/pocs/fabric-installer
+COPY ../../pocs/onboarding /service-fabric-packaging/pocs/onboarding
+COPY ../../Modules /service-fabric-packaging/Modules
+
+
+ENV KUBECONFIG "/service-fabric-packaging/rke2.yaml"
+COPY rke2.yaml /service-fabric-packaging/rke2.yaml
+
+WORKDIR /service-fabric-packaging
+# set permissions
+
+

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: istio-ingressgateway
+  namespace: istio-system
+spec:
+  ports:
+  - name: https-rgw
+    nodePort: 31443
+    port: 9443
+    protocol: TCP
+    targetPort: 9443
+  - name: https-rancher
+    nodePort: 32198
+    port: 10443
+    protocol: TCP
+    targetPort: 10443

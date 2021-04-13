@@ -1,0 +1,32 @@
+---
+# Source: istio-ingress/templates/gateway.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  namespace: istio-system
+  name: {{ .Values.gatewayName }}
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+    app: istio-ingressgateway
+  servers:
+  - hosts:
+    - "*"
+    port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      credentialName: {{ .Values.certificateName }}
+      mode: SIMPLE
+      privateKey: sds
+      serverCertificate: sds
+  {{- if eq .Values.httpEnabled true }}
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+  {{- end }}
+

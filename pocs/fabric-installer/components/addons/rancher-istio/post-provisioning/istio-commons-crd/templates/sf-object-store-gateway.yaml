@@ -1,0 +1,24 @@
+---
+# Source: istio-ingress/templates/gateway.yaml
+{{- if eq .Values.cephEnabled true }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway	
+metadata:	
+  namespace: {{ .Values.storageNamespace }}	
+  name: {{ .Values.storageGatewayName }}	
+spec:	
+  selector:	
+    istio: ingressgateway	
+  servers:	
+  - port:	
+      number: 9443	
+      name: https-rgw	
+      protocol: HTTPS	
+    tls:	
+      credentialName: {{ .Values.certificateName }}
+      mode: SIMPLE
+      privateKey: sds
+      serverCertificate: sds
+    hosts:	
+    - "*"
+{{- end }}

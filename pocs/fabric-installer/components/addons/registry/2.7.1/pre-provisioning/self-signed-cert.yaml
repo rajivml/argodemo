@@ -1,0 +1,22 @@
+#https://cert-manager.io/docs/usage/certificate/
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: docker-registry-cert
+  namespace: uipath-default
+spec:
+  secretName: docker-registry-cert
+  duration: 8640h # 360d
+  renewBefore: 360h # 15d
+  issuerRef:
+    name: selfsigned-issuer
+  commonName: uipath-default.docker-registry.svc.cluster.local
+  dnsNames:
+  - uipath-default
+  - uipath-default.docker-registry
+  - uipath-default.docker-registry.svc
+  - uipath-default.docker-registry.svc.cluster
+  - uipath-default.docker-registry.svc.cluster.local
+  ipAddresses:
+  - 127.0.0.1
+  - 10.43.10.10

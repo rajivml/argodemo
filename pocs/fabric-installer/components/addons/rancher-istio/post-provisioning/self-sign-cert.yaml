@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: istio-ingressgateway-certs
+spec:
+  secretName: istio-ingressgateway-certs
+  dnsNames:
+  - "*.istio-system.svc.cluster.local"
+  - "*.istio-system"
+  - "*.INGRESS_HOST"
+  issuerRef:
+    name: selfsigned-issuer

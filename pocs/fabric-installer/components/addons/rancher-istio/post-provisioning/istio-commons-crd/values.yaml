@@ -1,0 +1,10 @@
+# namespace, app.name are used to assemble jwksUri in istio-policy.yaml, be careful when changing their name, value and position.
+storageNamespace: rook-ceph
+httpEnabled: true
+testPathEnabled: true
+cephEnabled: true
+gatewayName: service-fabric-gateway
+policyGatewayName: istio-system/service-fabric-gateway
+storageGatewayName: rook-ceph-gateway
+cephServicePortNumber: 80
+certificateName: istio-ingressgateway-certs

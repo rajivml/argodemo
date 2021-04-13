@@ -1,0 +1,28 @@
+---
+# Source: istio-ingress/templates/virtual-service.yaml
+{{- if eq .Values.cephEnabled true }}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: aifabric-rook-ceph-virtual-service
+  namespace: {{ .Values.storageNamespace }}
+  labels:
+    app: aifabric-rook-ceph-virtual-service
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - {{ .Values.storageGatewayName }}
+  hosts:
+  - '*'
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: rook-ceph-rgw-rook-ceph-store
+        port:
+          number: {{ .Values.cephServicePortNumber }}
+{{- end }}        
+
