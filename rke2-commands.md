@@ -139,3 +139,25 @@ etcdcontainer=$(/var/lib/rancher/rke2/bin/crictl ps --label io.kubernetes.contai
 ```
 curl -L --cacert /var/lib/rancher/rke2/server/tls/etcd/server-ca.crt --cert /var/lib/rancher/rke2/server/tls/etcd/server-client.crt --key /var/lib/rancher/rke2/server/tls/etcd/server-client.key https://127.0.0.1:2379/metrics
 ```
+
+* Kubernetes commands
+
+```
+kubectl get events --all-namespaces
+kubectl get crd | grep rook | xargs -l1 --no-run-if-empty -- sh -c 'kubectl delete crd $0'
+kubectl patch crd clusters.ceph.rook.io -p '{"metadata":{"finalizers": []}}' --type=merge
+kubectl -n aifabric get jobs | grep hit-count | awk -F ' ' '{print $1}' | xargs -l1 -- sh -c 'kubectl -n aifabric delete job $0'
+kubectl get namespaces | grep -E '[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}' | grep -v -e "1712ffff-6e82-4d1c-a235-5aba36aa8e14" -e "2b6bb06a-6b64-4c8b-966e-ab348fcca547" | awk -F ' ' '{print $1}' | xargs -l1 -- sh -c 'kubectl delete namespace --namespace="$0"'
+kubectl get customresourcedefinitions | grep management.cattle.io | xargs -l1 --no-run-if-empty -- sh -c 'kubectl delete crd $0'
+kubectl api-resources --verbs=list --namespaced -o name | xargs -n 1 kubectl get --show-kind --ignore-not-found -n <namespace>
+find . -type f -print0 | xargs -0 dos2unix
+kubectl -n cattle-system get pods| grep helm-operation | awk -F ' ' '{print $1}' | xargs -l1 -- sh -c 'kubectl -n cattle-system delete pod $0'
+```
+
+* Patch CRD's
+
+```
+for CRD in $(kubectl get crd | grep longhorn | cut -d " " -f 1 | xargs); do kubectl patch crd -n default $CRD --type merge -p '{"metadata":{"finalizers": [null]}}'; done
+for CRD in $(kubectl get crd | grep longhorn | cut -d " " -f 1 | xargs); do kubectl delete crd -n default $CRD; done
+```
+
