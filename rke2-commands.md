@@ -161,3 +161,17 @@ for CRD in $(kubectl get crd | grep longhorn | cut -d " " -f 1 | xargs); do kube
 for CRD in $(kubectl get crd | grep longhorn | cut -d " " -f 1 | xargs); do kubectl delete crd -n default $CRD; done
 ```
 
+* Fetch Images
+
+```
+kubectl get pods -n mongodb -o jsonpath="{.items[*].spec.containers[*].image}" |\
+tr -s '[[:space:]]' '\n' |\
+sort |\
+uniq -c
+
+kubectl get pods -n mongodb -o jsonpath="{.items[*].spec.initContainers[*].image}" |\
+tr -s '[[:space:]]' '\n' |\
+sort |\
+uniq -c
+```
+
