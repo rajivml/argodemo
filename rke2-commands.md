@@ -140,7 +140,7 @@ etcdcontainer=$(/var/lib/rancher/rke2/bin/crictl ps --label io.kubernetes.contai
 curl -L --cacert /var/lib/rancher/rke2/server/tls/etcd/server-ca.crt --cert /var/lib/rancher/rke2/server/tls/etcd/server-client.crt --key /var/lib/rancher/rke2/server/tls/etcd/server-client.key https://127.0.0.1:2379/metrics
 ```
 
-* Kubernetes commands
+## Kubernetes commands
 
 ```
 kubectl get events --all-namespaces
