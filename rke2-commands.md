@@ -167,3 +167,9 @@ for CRD in $(kubectl get crd | grep longhorn | cut -d " " -f 1 | xargs); do kube
 echo $(kubectl get pods -n mongodb -o jsonpath="{.items[*].spec.containers[*].image}") $(kubectl get pods -n mongodb -o jsonpath="{.items[*].spec.initContainers[*].image}") | tr -s '[[:space:]]' '\n' | sort | uniq
 ```
 
+* Fetch Images All Namespaces
+
+```
+for namespace in $(kubectl get ns | cut -d " " -f 1 | xargs); do echo $(kubectl get pods -n $namespace -o jsonpath="{.items[*].spec.containers[*].image}") $(kubectl get pods -n $namespace -o jsonpath="{.items[*].spec.initContainers[*].image}") | tr -s '[[:space:]]' '\n' | sort | uniq; done
+```
+
