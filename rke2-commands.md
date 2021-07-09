@@ -173,3 +173,9 @@ echo $(kubectl get pods -n mongodb -o jsonpath="{.items[*].spec.containers[*].im
 for namespace in $(kubectl get ns | cut -d " " -f 1 | xargs); do echo $(kubectl get pods -n $namespace -o jsonpath="{.items[*].spec.containers[*].image}") $(kubectl get pods -n $namespace -o jsonpath="{.items[*].spec.initContainers[*].image}") | tr -s '[[:space:]]' '\n' | sort | uniq; done
 ```
 
+* Fetch Priority Classes
+
+```
+for deploy in $(kubectl get deploy -oname -n xxx | xargs); do echo $deploy;echo $(kubectl get $deploy -n xxx -o json | jq -r '.spec.template.spec.priorityClassName');  done
+```
+
