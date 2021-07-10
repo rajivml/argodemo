@@ -190,3 +190,7 @@ kubectl edit K8sPSPPrivilegedContainer psp-privileged-container
  kubectl edit K8sPSPCapabilities psp-capabilities 
  ```
 
+* Check Connectivity URL
+```
+if nc -z -v -w5 loki:3100 &>/dev/null; then echo "connected"; else echo "not able to connect"; fi
+```
