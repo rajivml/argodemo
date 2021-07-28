@@ -182,7 +182,7 @@ for deploy in $(kubectl get deploy -oname -n xxx | xargs); do echo $deploy;echo 
 * Fetch Pods By Label
 
 ```
-for pod in $(kubectl -n mongodb get pods --selector=app=ops-manager-svc -oname | xargs); do echo $pod;  done
+for pod in $(kubectl -n mongodb get pods --selector=app=ops-manager-svc -oname | awk -F "/" '{print $2}' | xargs); do echo $pod;  done
 ```
 
 
