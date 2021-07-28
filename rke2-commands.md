@@ -179,10 +179,17 @@ for namespace in $(kubectl get ns | cut -d " " -f 1 | xargs); do echo $(kubectl 
 for deploy in $(kubectl get deploy -oname -n xxx | xargs); do echo $deploy;echo $(kubectl get $deploy -n xxx -o json | jq -r '.spec.template.spec.priorityClassName');  done
 ```
 
+* Fetch Pods By Label
+
+```
+for pod in $(kubectl -n mongodb get pods --selector=app=ops-manager-svc -oname | xargs); do echo $pod;  done
+```
+
+
 * PSPS
 
 ```
-kubectl edit K8sPSPPrivilegedContainer psp-privileged-container
+ kubectl edit K8sPSPPrivilegedContainer psp-privileged-container
  kubectl edit K8sPSPAllowedUsers psp-pods-allowed-user-ranges 
  kubectl edit K8sPSPAllowPrivilegeEscalationContainer psp-allow-privilege-escalation-container 
  kubectl edit K8sPSPVolumeTypes psp-volume-types 
