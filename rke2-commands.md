@@ -222,3 +222,21 @@ done
 echo "Total CPU: $total_cpu"
 echo "Total memory: $total_memory"
 ```
+
+* Total PVC Size
+
+```
+total_capacity=0
+
+namespaces=$(kubectl get pvc -A --no-headers -o custom-columns=NAME:.metadata.namespace | sort | uniq)
+
+for namespace in $namespaces; do
+  pvcs=$(kubectl get pvc -n $namespace --no-headers -o custom-columns=NAME:.metadata.name)
+  for pvc in $pvcs; do
+      storage=$(kubectl -n $namespace get pvc $pvc -ojson | jq -r '.status.capacity.storage' | grep Gi | tr -d 'Gi')
+      total_capacity=$((total_capacity + storage))
+  done
+done
+
+echo "Total Capacity: $total_capacity"
+```
