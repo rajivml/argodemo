@@ -212,8 +212,8 @@ nodes=$(kubectl get node --no-headers -o custom-columns=NAME:.metadata.name)
 
 for node in $nodes; do
   echo "Node: $node"
-  cpu=$(kubectl describe node  | grep Capacity: -A 1 | sed -n 2p | cut -d':' -f2 | tr -d ' ')
-  memory=$(kubectl get node server0 -o json | jq -r '.status.capacity."ephemeral-storage"' | tr -d 'Mi')
+  cpu=$(kubectl get node $node -o json | jq -r '.status.capacity.cpu')
+  memory=$(kubectl get node $node -o json | jq -r '.status.capacity."ephemeral-storage"' | tr -d 'Mi')
   total_cpu=$((total_cpu + cpu))
   total_memory=$((total_memory + memory))
   echo
