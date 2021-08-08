@@ -201,3 +201,24 @@ for pod in $(kubectl -n mongodb get pods --selector=app=ops-manager-svc -oname |
 ```
 if nc -z -v -w5 loki:3100 &>/dev/null; then echo "connected"; else echo "not able to connect"; fi
 ```
+
+* Total Capacity of Cluster
+
+```
+total_cpu=0
+total_memory=0
+
+nodes=$(kubectl get node --no-headers -o custom-columns=NAME:.metadata.name)
+
+for node in $nodes; do
+  echo "Node: $node"
+  cpu=$(kubectl describe node  | grep Capacity: -A 1 | sed -n 2p | cut -d':' -f2 | tr -d ' ')
+  memory=$(kubectl get node server0 -o json | jq -r '.status.capacity."ephemeral-storage"' | tr -d 'Mi')
+  total_cpu=$((total_cpu + cpu))
+  total_memory=$((total_memory + memory))
+  echo
+done
+
+echo "Total CPU: $total_cpu"
+echo "Total memory: $total_memory"
+```
