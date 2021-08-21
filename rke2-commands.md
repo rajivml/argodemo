@@ -240,3 +240,9 @@ done
 
 echo "Total Capacity: $total_capacity"
 ```
+
+* Sort Pods by Timestamp
+
+```
+kubectl get pods --all-namespaces --sort-by=.metadata.creationTimestamp
+```
