@@ -246,3 +246,9 @@ echo "Total Capacity: $total_capacity"
 ```
 kubectl get pods --all-namespaces --sort-by=.metadata.creationTimestamp
 ```
+
+* Fetch PodID
+
+```
+kubectl get pods -n <namespace> <pod-name> -o jsonpath='{.metadata.uid}'
+```
