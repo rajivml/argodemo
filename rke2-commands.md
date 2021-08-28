@@ -252,3 +252,9 @@ kubectl get pods --all-namespaces --sort-by=.metadata.creationTimestamp
 ```
 kubectl get pods -n <namespace> <pod-name> -o jsonpath='{.metadata.uid}'
 ```
+
+* Failed Scheduling
+
+```
+kubectl get events -A | grep FailedScheduling
+```
