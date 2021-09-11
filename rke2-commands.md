@@ -264,3 +264,9 @@ kubectl get events -A | grep FailedScheduling
 ```
 scp -rp testadmin@51.145.209.211:/home/testadmin/perf/ perf/
 ```
+
+* Accessing local HTML files
+
+```
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir="C:\Chrome_Data\OO7" --allow-file-access-from-files
+```
