@@ -258,3 +258,9 @@ kubectl get pods -n <namespace> <pod-name> -o jsonpath='{.metadata.uid}'
 ```
 kubectl get events -A | grep FailedScheduling
 ```
+
+* SCP
+
+```
+scp -rp testadmin@51.145.209.211:/home/testadmin/perf/ perf/
+```
