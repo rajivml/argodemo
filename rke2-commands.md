@@ -270,3 +270,9 @@ scp -rp testadmin@51.145.209.211:/home/testadmin/perf/ perf/
 ```
 "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --user-data-dir="C:\Chrome_Data\OO7" --allow-file-access-from-files
 ```
+
+* Port forwarding from Local
+
+```
+kubectl -n rabbitmq port-forward service/rabbitmq 8800:15672
+```
