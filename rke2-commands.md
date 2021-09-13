@@ -275,4 +275,5 @@ scp -rp testadmin@51.145.209.211:/home/testadmin/perf/ perf/
 
 ```
 kubectl -n rabbitmq port-forward service/rabbitmq 8800:15672
+kubectl -n rook-ceph port-forward service/rook-ceph-mgr-dashboard 8800:8443
 ```
