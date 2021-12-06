@@ -79,6 +79,7 @@ List containers using ctr
 ```
 export CRI_CONFIG_FILE=/var/lib/rancher/rke2/agent/etc/crictl.yaml
 /var/lib/rancher/rke2/bin/crictl ps
+/var/lib/rancher/rke2/bin/crictl --runtime-endpoint unix:///run/k3s/containerd/containerd.sock images | grep pause
 ```
 
 ```
@@ -286,3 +287,17 @@ kubectl delete all --all -n mongodb
 kubectl -n mongodb get pvc --ignore-not-found -o name  | grep -E 'data-mongodb-replica-|data-ops-manager|data-uipath-oplog-db|head-ops-manager-backup-daemon|mongodb-versions-ops-manager' | xargs -l1 --no-run-if-empty -- sh -c 'kubectl -n mongodb delete $0'
 
 ```
+
+* Garbage Collection
+
+https://github.com/k3s-io/k3s/issues/1900
+
+https://access.redhat.com/documentation/en-us/openshift_container_platform/3.11/html/cluster_administration/admin-guide-garbage-collection
+https://github.com/containerd/containerd/blob/main/docs/garbage-collection.md
+https://github.com/k3s-io/k3s/commit/dfd4e42e57b3ff3080469cb929b8f37ffb04dede
+https://v1-21.docs.kubernetes.io/docs/concepts/architecture/garbage-collection/#containers-images
+https://stackoverflow.com/questions/45592781/how-to-change-kubernetes-garbage-collection-threshold-values
+https://jvns.ca/blog/2019/11/18/how-containers-work--overlayfs/ 
+
+export CRI_CONFIG_FILE=/var/lib/rancher/rke2/agent/etc/crictl.yaml
+/var/lib/rancher/rke2/bin/crictl rmi --prune
