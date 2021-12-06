@@ -290,6 +290,7 @@ kubectl -n mongodb get pvc --ignore-not-found -o name  | grep -E 'data-mongodb-r
 
 * Garbage Collection
 
+```
 https://github.com/k3s-io/k3s/issues/1900
 
 https://access.redhat.com/documentation/en-us/openshift_container_platform/3.11/html/cluster_administration/admin-guide-garbage-collection
@@ -301,3 +302,6 @@ https://jvns.ca/blog/2019/11/18/how-containers-work--overlayfs/
 
 export CRI_CONFIG_FILE=/var/lib/rancher/rke2/agent/etc/crictl.yaml
 /var/lib/rancher/rke2/bin/crictl rmi --prune
+```
+
+
