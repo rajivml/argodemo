@@ -72,6 +72,7 @@ List containers using ctr
 
 ```
 /var/lib/rancher/rke2/bin/ctr --address /run/k3s/containerd/containerd.sock --namespace k8s.io container ls
+/var/lib/rancher/rke2/bin/ctr -a /run/k3s/containerd/containerd.sock --namespace k8s.io image ls | grep pause
 ```
 
 ### crictl
@@ -80,6 +81,9 @@ List containers using ctr
 export CRI_CONFIG_FILE=/var/lib/rancher/rke2/agent/etc/crictl.yaml
 /var/lib/rancher/rke2/bin/crictl ps
 /var/lib/rancher/rke2/bin/crictl --runtime-endpoint unix:///run/k3s/containerd/containerd.sock images | grep pause
+/var/lib/rancher/rke2/bin/crictl --runtime-endpoint unix:///run/k3s/containerd/containerd.sock rmi docker.io/rancher/pause:3.5
+/var/lib/rancher/rke2/bin/crictl --runtime-endpoint unix:///run/k3s/containerd/containerd.sock pull docker.io/rancher/pause:3.5
+/var/lib/rancher/rke2/bin/crictl --runtime-endpoint unix:///run/k3s/containerd/containerd.sock image ls | grep docker.io/rancher/pause:3.5
 ```
 
 ```
