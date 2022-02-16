@@ -308,4 +308,29 @@ export CRI_CONFIG_FILE=/var/lib/rancher/rke2/agent/etc/crictl.yaml
 /var/lib/rancher/rke2/bin/crictl rmi --prune
 ```
 
+* CEPH Commands
+
+```
+ceph osd lspools
+rados lspools
+ceph osd dump
+ceph osd df
+ceph df
+ceph df detail
+ceph health
+ceph health detail
+ceph osd dump
+ceph -s
+radosgw-admin gc process
+radosgw-admin bucket stats | grep '"size_kb":'
+rados -p rook-ceph-store.rgw.buckets.data ls
+radosgw-admin object stat --bucket=hailmary --object=breaknow
+rados -p .rgw.buckets stat "default.25941.2__multipart_8MiB.2~7HMRML_6La66Dn7AqEa9WV3wLHCny5Z.1"
+ceph osd status
+ceph osd pool ls detail
+rados df
+ceph health detail | ag 'not deep-scrubbed since' | awk '{print $2}' | while read pg; do ceph pg deep-scrub $pg; done
+
+```
+
 
