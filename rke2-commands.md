@@ -199,7 +199,8 @@ for pod in $(kubectl -n mongodb get pods --selector=app=ops-manager-svc -oname |
  kubectl edit K8sPSPAllowPrivilegeEscalationContainer psp-allow-privilege-escalation-container 
  kubectl edit K8sPSPVolumeTypes psp-volume-types 
  kubectl edit K8sPSPReadOnlyRootFilesystem psp-readonlyrootfilesystem 
- kubectl edit K8sPSPCapabilities psp-capabilities 
+ kubectl edit K8sPSPCapabilities psp-capabilities
+ kubectl edit K8sBlockHostNetwork block-host-network
  ```
 
 * Check Connectivity URL
