@@ -333,4 +333,11 @@ ceph health detail | ag 'not deep-scrubbed since' | awk '{print $2}' | while rea
 
 ```
 
+* Disable Self Heal 
+```
+kubectl -n argocd patch application automationhub --type=json -p '[
+{"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
+]'
+```
+
 
