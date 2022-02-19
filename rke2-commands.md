@@ -345,6 +345,7 @@ kubectl -n argocd patch application automationhub --type=json -p '[
 ```
 https://github.com/rook/rook/blob/master/Documentation/ceph-osd-mgmt.md#remove-an-osd-from-a-pvc
 https://github.com/rook/rook/blob/master/Documentation/ceph-cluster-crd.md#storage-class-device-sets
+https://raw.githubusercontent.com/rook/rook/master/deploy/examples/osd-purge.yaml
 ```
 
 
