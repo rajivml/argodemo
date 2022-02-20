@@ -355,6 +355,9 @@ ceph osd dump | grep full_ratio
 ceph osd stat
 ceph osd tree
 ceph osd tree down
+ceph status
+ceph osd status
+ceph osd utilization
 ceph pg dump
 ceph pg dump -o {filename} --format=json
 https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-osd/#stopping-w-out-rebalancing
