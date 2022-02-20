@@ -348,6 +348,8 @@ https://github.com/rook/rook/blob/master/Documentation/ceph-cluster-crd.md#stora
 https://raw.githubusercontent.com/rook/rook/master/deploy/examples/osd-purge.yaml
 #ceph recovery status https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/#observe-the-data-migration
 ceph -w 
+ceph df
+ceph osd dump | grep full_ratio
 ```
 
 
