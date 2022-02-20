@@ -346,10 +346,23 @@ kubectl -n argocd patch application automationhub --type=json -p '[
 https://github.com/rook/rook/blob/master/Documentation/ceph-osd-mgmt.md#remove-an-osd-from-a-pvc
 https://github.com/rook/rook/blob/master/Documentation/ceph-cluster-crd.md#storage-class-device-sets
 https://raw.githubusercontent.com/rook/rook/master/deploy/examples/osd-purge.yaml
+https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/#removing-osds-manual
 #ceph recovery status https://docs.ceph.com/en/latest/rados/operations/add-or-rm-osds/#observe-the-data-migration
 ceph -w 
 ceph df
+ceph osd df
 ceph osd dump | grep full_ratio
+ceph osd stat
+ceph osd tree
+ceph osd tree down
+ceph pg dump
+ceph pg dump -o {filename} --format=json
+https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-osd/#stopping-w-out-rebalancing
+ceph pg stat
+#no to single node cluster
+https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-pg/#one-node-cluster
+https://docs.ceph.com/en/latest/rados/troubleshooting/memory-profiling/
+https://docs.ceph.com/en/latest/rados/troubleshooting/cpu-profiling/
 ```
 
 
