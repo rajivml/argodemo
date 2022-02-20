@@ -363,6 +363,7 @@ ceph pg stat
 https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-pg/#one-node-cluster
 https://docs.ceph.com/en/latest/rados/troubleshooting/memory-profiling/
 https://docs.ceph.com/en/latest/rados/troubleshooting/cpu-profiling/
+https://min.io/product/erasure-code-calculator
 ```
 
 
