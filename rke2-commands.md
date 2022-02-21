@@ -369,6 +369,8 @@ https://docs.ceph.com/en/latest/rados/troubleshooting/cpu-profiling/
 https://min.io/product/erasure-code-calculator
 #CEPH garbage collection
 https://stackoverflow.com/questions/46846647/ceph-s3-bucket-space-not-freeing-up
+#CEPH common issues
+https://github.com/rook/rook/tree/master/Documentation
 ```
 
 
