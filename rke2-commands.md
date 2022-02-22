@@ -371,6 +371,7 @@ https://min.io/product/erasure-code-calculator
 https://stackoverflow.com/questions/46846647/ceph-s3-bucket-space-not-freeing-up
 #CEPH common issues
 https://github.com/rook/rook/tree/master/Documentation
+https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md#restoring-mon-quorum
 ```
 
 #Fetch Passwords Rancher
