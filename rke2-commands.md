@@ -379,8 +379,8 @@ kubectl -n argocd patch application rook-ceph-object-store --type=json -p '[
 {"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
 ]'
 
-kubectl -n rook-ceph patch clusters.ceph.rook.io rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
-kubectl -n rook-ceph patch crd objectstores.rook.io -p '{"metadata":{"finalizers": []}}' --type=merge
+kubectl -n rook-ceph patch CephCluster rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
+kubectl -n rook-ceph patch CephObjectStore rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
 or
 for CRD in $(kubectl get crd -n rook-ceph | grep rook.io | cut -d " " -f 1 | xargs); do kubectl patch crd -n rook-ceph $CRD --type merge -p '{"metadata":{"finalizers": [null]}}'; done
 
