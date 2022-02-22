@@ -383,4 +383,9 @@ https://github.com/rook/rook/tree/master/Documentation
 https://red-hat-storage.github.io/ocs-sop/sop/index.html
 ```
 
-
+#Erasure Coding
+```
+https://www.youtube.com/watch?v=Q5kVuM7zEUI
+https://www.youtube.com/watch?v=CryhjBWQHvM
+https://min.io/product/erasure-code-calculator
+```
