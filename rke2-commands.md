@@ -378,7 +378,7 @@ https://github.com/rook/rook/blob/master/Documentation/ceph-object-store-crd.md#
 kubectl -n argocd patch application rook-ceph-object-store --type=json -p '[
 {"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
 ]'
-
+* Delete application
 kubectl -n rook-ceph patch CephCluster rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
 kubectl -n rook-ceph patch CephObjectStore rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
 rm -rf /var/lib/rook/
