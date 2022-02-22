@@ -381,6 +381,7 @@ kubectl -n argocd patch application rook-ceph-object-store --type=json -p '[
 
 kubectl -n rook-ceph patch CephCluster rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
 kubectl -n rook-ceph patch CephObjectStore rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
+rm -rf /var/lib/rook/
 or
 for CRD in $(kubectl get crd -n rook-ceph | grep rook.io | cut -d " " -f 1 | xargs); do kubectl patch crd -n rook-ceph $CRD --type merge -p '{"metadata":{"finalizers": [null]}}'; done
 
