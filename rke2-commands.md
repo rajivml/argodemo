@@ -373,4 +373,9 @@ https://stackoverflow.com/questions/46846647/ceph-s3-bucket-space-not-freeing-up
 https://github.com/rook/rook/tree/master/Documentation
 ```
 
+#Fetch Passwords Rancher
+```
+ kubectl get secrets/rancher-admin-password -n cattle-system -o "jsonpath={.data['password']}" | echo $(base64 -d)
+```
+
 
