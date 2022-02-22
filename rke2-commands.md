@@ -381,6 +381,7 @@ https://github.com/rook/rook/tree/master/Documentation
 #Rook Alerting SOP's
 ```
 https://red-hat-storage.github.io/ocs-sop/sop/index.html
+https://uipath-product.slack.com/archives/C02E3B9991N/p1645515800067609?thread_ts=1645169044.462809&cid=C02E3B9991N
 ```
 
 #Erasure Coding
