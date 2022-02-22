@@ -373,6 +373,7 @@ https://stackoverflow.com/questions/46846647/ceph-s3-bucket-space-not-freeing-up
 https://github.com/rook/rook/tree/master/Documentation
 https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md#restoring-mon-quorum
 https://rook.io/docs/rook/v1.8/ceph-osd-mgmt.html
+https://github.com/rook/rook/blob/master/Documentation/ceph-object-store-crd.md#object-store-settings
 ```
 
 #Fetch Passwords Rancher
