@@ -374,6 +374,16 @@ https://github.com/rook/rook/tree/master/Documentation
 https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md#restoring-mon-quorum
 https://rook.io/docs/rook/v1.8/ceph-osd-mgmt.html
 https://github.com/rook/rook/blob/master/Documentation/ceph-object-store-crd.md#object-store-settings
+
+kubectl -n argocd patch application rook-ceph-object-store --type=json -p '[
+{"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
+]'
+
+kubectl -n rook-ceph patch clusters.ceph.rook.io rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
+kubectl -n rook-ceph patch crd objectstores.rook.io -p '{"metadata":{"finalizers": []}}' --type=merge
+or
+for CRD in $(kubectl get crd -n rook-ceph | grep rook.io | cut -d " " -f 1 | xargs); do kubectl patch crd -n rook-ceph $CRD --type merge -p '{"metadata":{"finalizers": [null]}}'; done
+
 ```
 
 #Fetch Passwords Rancher
