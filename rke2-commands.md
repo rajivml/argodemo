@@ -367,8 +367,14 @@ https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-pg/#one-no
 https://docs.ceph.com/en/latest/rados/troubleshooting/memory-profiling/
 https://docs.ceph.com/en/latest/rados/troubleshooting/cpu-profiling/
 https://min.io/product/erasure-code-calculator
-#CEPH garbage collection
+#CEPH garbage collection/cleanup/delete data
 https://stackoverflow.com/questions/46846647/ceph-s3-bucket-space-not-freeing-up
+Approach 1:
+radosgw-admin gc list --include-all
+radosgw-admin gc process
+Approach 2: Mostly approach1 doesn't work
+ceph df
+rados purge default.rgw.buckets.data --yes-i-really-really-mean-it   
 #CEPH common issues
 https://github.com/rook/rook/tree/master/Documentation
 https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md#restoring-mon-quorum
