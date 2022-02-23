@@ -380,6 +380,7 @@ https://github.com/rook/rook/tree/master/Documentation
 https://github.com/rook/rook/blob/master/Documentation/ceph-disaster-recovery.md#restoring-mon-quorum
 https://rook.io/docs/rook/v1.8/ceph-osd-mgmt.html
 https://github.com/rook/rook/blob/master/Documentation/ceph-object-store-crd.md#object-store-settings
+https://documentation.suse.com/ses/7/html/ses-all/cha-ceph-gw.html#cceph-rgw-create-secondaryzone
 
 kubectl -n argocd patch application rook-ceph-object-store --type=json -p '[
 {"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
