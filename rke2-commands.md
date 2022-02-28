@@ -414,3 +414,16 @@ https://www.youtube.com/watch?v=CryhjBWQHvM
 https://min.io/product/erasure-code-calculator
 [https://min.io/product/erasure-code-calculator](#11-hello-world)
 ```
+
+#Cleanup evicted pods left behind after disk pressure
+```
+kubectl get pods --all-namespaces -ojson | jq -r '.items[] | select(.status.reason!=null) | select(.status.reason | contains("Evicted")) | .metadata.name + " " + .metadata.namespace' | xargs -n2 -l bash -c 'kubectl delete pods $0 --namespace=$1'
+```
+
+#findLeader
+```
+#!/bin/bash
+NODE="$(kubectl -n kube-system get endpoints kube-scheduler -o jsonpath='{.metadata.annotations.control-plane\.alpha\.kubernetes\.io/leader}' | jq -r .holderIdentity | sed 's/_[^_]*$//')"
+echo "kube-scheduler is the leader on node $NODE"
+```
+
