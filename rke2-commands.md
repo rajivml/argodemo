@@ -427,3 +427,9 @@ NODE="$(kubectl -n kube-system get endpoints kube-scheduler -o jsonpath='{.metad
 echo "kube-scheduler is the leader on node $NODE"
 ```
 
+#FUC
+```
+kubectl get pods -A | grep -v Running | grep -v Completed
+kubectl -n longhorn-system get volumes.longhorn.io
+diff <(kubectl get volumeattachment -o jsonpath="{.items[*].spec.source.persistentVolumeName}" | tr " " "\n" | sort) <(kubectl get pvc -A -o jsonpath="{.items[*].spec.volumeName}" | tr " " "\n" | sort)
+```
