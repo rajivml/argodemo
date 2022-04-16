@@ -433,3 +433,13 @@ kubectl get pods -A | grep -v Running | grep -v Completed
 kubectl -n longhorn-system get volumes.longhorn.io
 diff <(kubectl get volumeattachment -o jsonpath="{.items[*].spec.source.persistentVolumeName}" | tr " " "\n" | sort) <(kubectl get pvc -A -o jsonpath="{.items[*].spec.volumeName}" | tr " " "\n" | sort)
 ```
+
+
+#Delete Pods stuck in Terminating state
+```
+kubectl get pods --all-namespaces | grep Terminating | while read line; do
+  pod_name=$(echo $line | awk '{print $2}' ) \
+  name_space=$(echo $line | awk '{print $1}' ); \
+  kubectl delete pods $pod_name -n $name_space --grace-period=0 --force
+done
+```
