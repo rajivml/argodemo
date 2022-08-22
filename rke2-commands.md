@@ -384,15 +384,25 @@ https://documentation.suse.com/ses/7/html/ses-all/cha-ceph-gw.html#cceph-rgw-cre
 https://github.com/rook/rook/blob/master/Documentation/ceph-object-multisite.md
 https://docs.ceph.com/en/latest/rados/troubleshooting/troubleshooting-osd/#no-free-drive-space
 
+
+kubectl -n argocd patch application fabric-installer --type=json -p '[
+{"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
+]'
 kubectl -n argocd patch application rook-ceph-object-store --type=json -p '[
 {"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
 ]'
+kubectl -n argocd patch application rook-ceph-operator --type=json -p '[
+{"op":"replace","path":"/spec/syncPolicy/automated/selfHeal","value":false}
+]'
+
 * Delete application
 kubectl -n rook-ceph patch CephCluster rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
 kubectl -n rook-ceph patch CephObjectStore rook-ceph -p '{"metadata":{"finalizers": []}}' --type=merge
 rm -rf /var/lib/rook/
-or
+
 for CRD in $(kubectl get crd -n rook-ceph | grep rook.io | cut -d " " -f 1 | xargs); do kubectl patch crd -n rook-ceph $CRD --type merge -p '{"metadata":{"finalizers": [null]}}'; done
+kubectl get crd | grep rook | xargs -l1 --no-run-if-empty -- sh -c 'kubectl delete crd $0'
+
 
 ```
 
