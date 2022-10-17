@@ -330,6 +330,7 @@ rados -p .rgw.buckets stat "default.25941.2__multipart_8MiB.2~7HMRML_6La66Dn7AqE
 ceph osd status
 ceph osd pool ls detail
 rados df
+ceph-conf --show-config | egrep "osd_recovery_max_active|osd_recovery_op_priority|osd_max_backfills"
 ceph health detail | ag 'not deep-scrubbed since' | awk '{print $2}' | while read pg; do ceph pg deep-scrub $pg; done
 
 ```
