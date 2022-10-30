@@ -3,6 +3,10 @@
 ## Install
 
 ```
+kubectl completion bash >> ~/.kube/completion.bash; source ~/.kube/completion.bash
+```
+
+```
 curl -sL https://get.rke2.io | sh
 systemctl daemon-reload
 systemctl start rke2-server
