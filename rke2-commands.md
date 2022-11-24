@@ -3,6 +3,16 @@
 ## Install
 
 ```
+on server nodes:
+export KUBECONFIG="/etc/rancher/rke2/rke2.yaml"
+export PATH="$PATH:/usr/local/bin:/var/lib/rancher/rke2/bin"
+
+on agent nodes:
+export KUBECONFIG="/var/lib/rancher/rke2/agent/kubelet.kubeconfig"
+export PATH="$PATH:/usr/local/bin:/var/lib/rancher/rke2/bin"
+```
+
+```
 kubectl completion bash >> ~/.kube/completion.bash; source ~/.kube/completion.bash
 ```
 
