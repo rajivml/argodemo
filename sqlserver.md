@@ -20,7 +20,10 @@ EXECUTE (@SQL)
 
 COMMIT
 
+```
 
+
+```
 SELECT 
     'ALTER TABLE [' +  OBJECT_SCHEMA_NAME(parent_object_id) +
     '].[' + OBJECT_NAME(parent_object_id) + 
